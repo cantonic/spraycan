@@ -90,36 +90,36 @@
       <div class="repeat">
         <h6>Repeat</h6>
         <div class="values ui-buttonset">
-          <input id="images-bg-no-repeat" name="radio[repeat]" type="radio">
+          <input <%= (Spraycan.preferences.background_repeat == 'no-repeat') ? 'checked="checked"' : "" %> id="images-bg-no-repeat" name="radio[repeat]" type="radio">
           <label class="first bg-no-repeat" for="images-bg-no-repeat"></label>
-          <input checked="checked" id="images-bg-repeat-x" name="radio[repeat]" type="radio">
+          <input <%= (Spraycan.preferences.background_repeat == 'repeat-x') ? 'checked="checked"' : "" %> id="images-bg-repeat-x" name="radio[repeat]" type="radio">
           <label class="bg-repeat-x" for="images-bg-repeat-x"></label>
-          <input id="images-bg-repeat-y" name="radio[repeat]" type="radio">
+          <input <%= (Spraycan.preferences.background_repeat == 'repeat-y') ? 'checked="checked"' : "" %> id="images-bg-repeat-y" name="radio[repeat]" type="radio">
           <label class="bg-repeat-y" for="images-bg-repeat-y"></label>
-          <input id="images-bg-repeat" name="radio[repeat]" type="radio">
+          <input <%= (Spraycan.preferences.background_repeat == 'repeat') ? 'checked="checked"' : "" %> id="images-bg-repeat" name="radio[repeat]" type="radio">
           <label class="last bg-repeat" for="images-bg-repeat"></label>
         </div>
       </div>
       <div class="align">
         <h6>Align</h6>
         <div class="values full ui-buttonset">
-          <input id="images-bg-align-top-left" name="radio[background][align]" type="radio">
+          <input <%= (Spraycan.preferences.background_alignment == 'top left') ? 'checked="checked"' : "" %> id="images-bg-align-top-left" name="radio[background][align]" type="radio">
           <label class="first arrow-top-left" for="images-bg-align-top-left"></label>
-          <input checked="checked" id="images-bg-align-top-center" name="radio[background][align]" type="radio">
+          <input <%= (Spraycan.preferences.background_alignment == 'top center') ? 'checked="checked"' : "" %> id="images-bg-align-top-center" name="radio[background][align]" type="radio">
           <label class="arrow-top-center" for="images-bg-align-top-center"></label>
-          <input id="images-bg-align-top-right" name="radio[background][align]" type="radio">
+          <input <%= (Spraycan.preferences.logo_alignment == 'top right') ? 'checked="checked"' : "" %> id="images-bg-align-top-right" name="radio[background][align]" type="radio">
           <label class="last arrow-top-right" for="images-bg-align-top-right"></label>
-          <input id="images-bg-align-center-left" name="radio[background][align]" type="radio">
+          <input <%= (Spraycan.preferences.background_alignment == 'center left') ? 'checked="checked"' : "" %> id="images-bg-align-center-left" name="radio[background][align]" type="radio">
           <label class="first" for="images-bg-align-center-left"></label>
-          <input id="images-bg-align-center-center" name="radio[background][align]" type="radio">
+          <input <%= (Spraycan.preferences.background_alignment == 'center center') ? 'checked="checked"' : "" %> id="images-bg-align-center-center" name="radio[background][align]" type="radio">
           <label class="arrow-center-center" for="images-bg-align-center-center"></label>
-          <input id="images-bg-align-center-right" name="radio[background][align]" type="radio">
+          <input <%= (Spraycan.preferences.background_alignment == 'center right') ? 'checked="checked"' : "" %> id="images-bg-align-center-right" name="radio[background][align]" type="radio">
           <label class="last arrow-center-right" for="images-bg-align-center-right"></label>
-          <input id="images-bg-align-bottom-left" name="radio[background][align]" type="radio">
+          <input <%= (Spraycan.preferences.background_alignment == 'bottom left') ? 'checked="checked"' : "" %> id="images-bg-align-bottom-left" name="radio[background][align]" type="radio">
           <label class="first arrow-bottom-left" for="images-bg-align-bottom-left"></label>
-          <input id="images-bg-align-bottom-center" name="radio[background][align]" type="radio">
+          <input <%= (Spraycan.preferences.background_alignment == 'bottom center') ? 'checked="checked"' : "" %> id="images-bg-align-bottom-center" name="radio[background][align]" type="radio">
           <label class="arrow-bottom-center" for="images-bg-align-bottom-center"></label>
-          <input id="images-bg-align-bottom-right" name="radio[background][align]" type="radio">
+          <input <%= (Spraycan.preferences.background_alignment == 'bottom right') ? 'checked="checked"' : "" %> id="images-bg-align-bottom-right" name="radio[background][align]" type="radio">
           <label class="last arrow-bottom-right" for="images-bg-align-bottom-right"></label>
         </div>
       </div>
