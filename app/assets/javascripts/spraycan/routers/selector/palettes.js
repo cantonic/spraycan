@@ -22,7 +22,7 @@ Spraycan.Routers.Palettes = Spraycan.Routers.Base.extend({
 
     palette.save({active: true}, {
       success: function(model, resp) {
-        Spraycan.reload_frame();
+        Spraycan.reload_styles();
       },
       error: Spraycan.handle_save_error
     });

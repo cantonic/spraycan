@@ -89,11 +89,13 @@
           <h6 class="title">Palette name</h6>
         </div>
         <div class="section-body">
-          <input class="new-palette-field" name="name" size="23" type="text" value="<%= palette.name %>">
-          <br><br>
-          <input type="submit" value="<%= palette.id==undefined ? 'Add' : 'Save' %> palette">
-          <input class="back" type="button" value="Back">
-        </div>
+          <form action="#" id="new-palette-form" method="post">
+            <div class="text-field">
+              <input class="new-palette-field" name="name" size="20" type="text" value="<%= palette.name %>">
+            </div>
+            <input class="back" type="button" value="Back">
+          </form>
+        </div> 
       </div>
     </form>
   </div>

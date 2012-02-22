@@ -5,10 +5,10 @@
       <li class="ui-state-default ui-corner-top"><a href="#tab-layouts-product-listing">Product listing</a></li>
       <li class="ui-state-default ui-corner-top"><a href="#tab-layouts-product-details">Product details</a></li>
       <li class="ui-state-default ui-corner-top"><a href="#tab-layouts-cart">Cart</a></li>
-      <li class="ui-state-default ui-corner-top"><a href="#tab-layouts-checkout">Checkout</a></li>
+      <!-- <li class="ui-state-default ui-corner-top"><a href="#tab-layouts-checkout">Checkout</a></li> -->
     </ul>
     <div class="tabs-content">
-      <% _.each({layouts: 'store', product_listing: 'product-listing', product_details: 'product-details'}, function(display, applies_to){ %>
+      <% _.each({store: 'store', product_listing: 'product-listing', product_details: 'product-details', cart: 'cart'}, function(display, applies_to){ %>
         <div id="tab-layouts-<%= display %>" class="ui-tabs-panel ui-widget-content ui-corner-bottom <%= applies_to == 'layouts' ? '' : 'ui-tabs-hide' %>">
           <ul class="inline">
             <% _.each(Spraycan.themes.models, function(theme){ %>

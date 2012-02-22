@@ -35,6 +35,24 @@
     &:active, &:focus{
       outline: none;
     }
+
+    &.error {
+      border-color: #ff6351;
+    }
+  }
+
+  .text-field {
+    span.hint {
+      font-size: 9px;
+      text-transform: none;
+      font-weight: normal;      
+      font-family: "PT Sans Caption", sans-serif;
+      text-shadow: none;
+
+      &.error {
+        color: #ff6351;
+      }
+    }
   }
 
   .slider-wrap {
@@ -54,7 +72,164 @@
     }
   }
 
-  .ui-slider {
+  .align .values.ui-buttonset, .repeat .values.ui-buttonset {
+    @include box-shadow(0 0 10px 0 #383d3e inset);
+    background-color: #454b4e;
+    border-top: 1px solid #373d3e;
+    border-left: 1px solid #373d3e;
+    border-right: 1px solid #494e51;
+    border-bottom: 1px solid #494e51;
+    height: 30px;
+    margin: 0 !important;
+    font-size: 0 !important;     
+
+    .ui-button {
+      width: 40px;
+      height: 30px;
+      border-right: 1px solid #373d3e;
+      border-left: 1px solid #53585b;
+      margin-right: 0 !important; 
+      background-color: transparent !important;      
+
+      &.first {
+        border-left: none;
+      }
+      &.last{
+        border-right: none;
+      }
+      &.ui-state-active {
+        background-color: #a7d3fe !important;
+      }
+
+      &.ui-corner-right,  &.ui-corner-left {
+        @include border-radius(none !important);
+      }
+
+      .ui-button-text {
+        background-image: url("/assets/spraycan/selector/toolbar/radio-arrows.png");
+        background-repeat: no-repeat;
+        margin: 0 auto;
+        width: 20px;
+        height: 20px;
+        padding: 0 !important;
+        margin-top: 7px;
+      }
+
+      &.arrow-center-left .ui-button-text{
+        background-position: left top;
+      }
+      &.arrow-center-center .ui-button-text{
+        background-position: -40px bottom;
+        margin-top: 5px;
+      }
+      &.arrow-center-right .ui-button-text{
+        background-position: -20px top;
+      }
+      &.arrow-top-right .ui-button-text{
+        background-position: -40px top;
+      }
+      &.arrow-top-center .ui-button-text{
+        background-position: -20px -20px;
+      }
+      &.arrow-top-left .ui-button-text{
+        background-position: left -20px;
+      }
+      &.arrow-bottom-left .ui-button-text{
+        background-position: -20px bottom;
+      }
+      &.arrow-bottom-center .ui-button-text{
+        background-position: left bottom;
+      }
+      &.arrow-bottom-right .ui-button-text{
+        background-position: -40px -20px;
+      }
+
+      &.ui-state-active {
+         &.arrow-center-left .ui-button-text{
+          background-position: -60px top;
+        }
+        &.arrow-center-center .ui-button-text{
+          background-position: -100px bottom;
+          margin-top: 5px;
+        }
+        &.arrow-center-right .ui-button-text{
+          background-position: -80px top;
+        }
+        &.arrow-top-right .ui-button-text{
+          background-position: -100px top;
+        }
+        &.arrow-top-center .ui-button-text{
+          background-position: -80px -20px;
+        }
+        &.arrow-top-left .ui-button-text{
+          background-position: -60px -20px;
+        }
+        &.arrow-bottom-left .ui-button-text{
+          background-position: -80px bottom;
+        }
+        &.arrow-bottom-center .ui-button-text{
+          background-position: -60px bottom;
+        }
+        &.arrow-bottom-right .ui-button-text{
+          background-position: -100px -20px;
+        }
+      }
+    }
+  }
+
+  .align .values.full {
+    .ui-button {
+      &.arrow-center-left, &.arrow-center-center, &.arrow-center-right {
+        border-bottom: 1px solid#373d3e;
+        border-top: 1px solid #53585b;
+      }
+      &.arrow-top-left, &.arrow-top-center, &.arrow-top-right {
+        border-bottom: 1px solid #373d3e;
+      }
+      &.arrow-bottom-left, &.arrow-bottom-center, &.arrow-bottom-right {
+        border-top: 1px solid #53585b;
+      }
+    }
+  }
+
+  .repeat .values .ui-button {
+    .ui-button-text {
+      width: 23px !important;
+      height: 25px !important;
+      margin-top: 2px !important;
+    }
+
+    &.bg-no-repeat .ui-button-text{
+      background-position: -118px top;
+    }
+    &.bg-repeat-x .ui-button-text{
+      background-position: -148px top;
+    }
+    &.bg-repeat-y .ui-button-text{
+      background-position: -176px top;
+    }
+    &.bg-repeat .ui-button-text{
+      background-position: -202px top;
+    }
+
+    &.ui-state-active {
+      &.bg-no-repeat .ui-button-text{
+        background-position: -118px -27px;
+      }
+      &.bg-repeat-x .ui-button-text{
+        background-position: -148px -27px;
+      }
+      &.bg-repeat-y .ui-button-text{
+        background-position: -176px -27px;
+      }
+      &.bg-repeat .ui-button-text{
+        background-position: -202px -27px;
+      }
+    }
+
+  }
+
+  .ui-slider, .ui-progressbar {
     @include border-radius(10px);
     @include box-shadow(0 0 10px 0 #191c1d inset);
     background-color: #2b2e31;
@@ -62,7 +237,7 @@
     border-bottom: 1px solid #565c5f;
     border-right: 1px solid #565c5f;
 
-    .ui-slider-range {
+    .ui-slider-range, .ui-progressbar-value {
       @include background(none, linear-gradient(#4283d1, #245e8f));
       @include border-radius(10px);
       height: 4px !important;
@@ -78,6 +253,17 @@
       &:active, &:focus {
         outline: none;
       }
+    }
+  }
+
+  .ui-progressbar {
+    padding: 1px;
+    height: 8px !important;
+    margin-top: 5px;
+
+    .ui-progressbar-value {
+      margin-top: 1px;
+      height: 5px !important;
     }
   }
 
@@ -102,4 +288,3 @@
   }
 
 }
-

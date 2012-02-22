@@ -11,16 +11,36 @@
       Spraycan.theme_id = <%= Spraycan::Config.preferred_base_theme_id %>;
       Spraycan.preload.themes = <%== render(:file => 'spraycan/themes/index.json.rabl') %>;
       Spraycan.preload.palettes = <%== render(:file => 'spraycan/palettes/index.json.rabl') %>;
+
       Spraycan.preferences.favicon_file_name =  '<%= Spraycan::Config[:favicon_file_name] %>';
       Spraycan.preferences.logo_file_name = '<%= Spraycan::Config[:logo_file_name] %>';
       Spraycan.preferences.logo_alignment = '<%= Spraycan::Config[:logo_alignment] %>';
       Spraycan.preferences.background_file_name = '<%= Spraycan::Config[:background_file_name] %>';
       Spraycan.preferences.background_alignment = '<%= Spraycan::Config[:background_alignment] %>';
       Spraycan.preferences.background_repeat = '<%= Spraycan::Config[:background_repeat] %>';
-      <%# Spraycan.preferences.title_font = '<%= Spraycan::Config.preferred_title_font || 'Irish Growler' %>';%>
-      <%# Spraycan.preferences.title_font_size = '<%= Spraycan::Config.preferred_title_font_size || 35 %>';%>
-      <%# Spraycan.preferences.body_font = '<%= Spraycan::Config.preferred_body_font || 'Rock Salt' %>';%>
-      <%# Spraycan.preferences.body_font_size = '<%= Spraycan::Config.preferred_body_font_size || 15 %>';%>
+      Spraycan.preferences.title_font = '<%= Spraycan::Config.title_font %>';
+      Spraycan.preferences.body_font = '<%= Spraycan::Config.body_font %>';
+
+      Spraycan.preferences.header_navigation_font_size = '<%= Spraycan::Config.header_navigation_font_size %>';
+      Spraycan.preferences.horizontal_navigation_font_size = '<%= Spraycan::Config.horizontal_navigation_font_size %>';
+      Spraycan.preferences.main_navigation_header_font_size = '<%= Spraycan::Config.main_navigation_header_font_size %>';
+      Spraycan.preferences.main_navigation_font_size = '<%= Spraycan::Config.main_navigation_font_size %>';
+
+      Spraycan.preferences.product_list_name_font_size = '<%= Spraycan::Config.product_list_name_font_size %>';
+      Spraycan.preferences.product_list_price_font_size = '<%= Spraycan::Config.product_list_price_font_size %>';
+      Spraycan.preferences.product_list_header_font_size = '<%= Spraycan::Config.product_list_header_font_size %>';
+      Spraycan.preferences.product_list_search_font_size = '<%= Spraycan::Config.product_list_search_font_size %>';
+
+      Spraycan.preferences.product_detail_name_font_size = '<%= Spraycan::Config.product_detail_name_font_size %>';
+      Spraycan.preferences.product_detail_description_font_size = '<%= Spraycan::Config.product_detail_description_font_size %>';
+      Spraycan.preferences.product_detail_price_font_size = '<%= Spraycan::Config.product_detail_price_font_size %>';
+      Spraycan.preferences.product_detail_title_font_size = '<%= Spraycan::Config.product_detail_title_font_size %>';
+
+      Spraycan.preferences.base_font_size = '<%= Spraycan::Config.base_font_size %>';
+      Spraycan.preferences.heading_font_size = '<%= Spraycan::Config.heading_font_size %>';
+      Spraycan.preferences.sub_heading_font_size = '<%= Spraycan::Config.sub_heading_font_size %>';
+      Spraycan.preferences.button_font_size = '<%= Spraycan::Config.button_font_size %>';
+      Spraycan.preferences.input_box_font_size = '<%= Spraycan::Config.input_box_font_size %>';
     </script>
   </head>
   <body>
@@ -29,18 +49,21 @@
         <div class="wrap" id="main">
         </div>
       </div>
-      <div class="toolbar" style="width: 479px; ">
+      <div class="toolbar">
         <div class="wrap">
           <nav class="actions">
             <ul>
               <li class="drag">
                 <span class="icon"></span>
               </li>
-              <li class="show-hide">
+              <li class="ajax-spinner visible">
+                <span class="icon"></span>
+              </li>
+              <li class="show-hide hidden">
                 <span class="icon"></span>
               </li>
               <li class="save">
-                <span class="icon"></span>
+                <a href="#save"><span class="icon"></span></a>
               </li>
             </ul>
           </nav>

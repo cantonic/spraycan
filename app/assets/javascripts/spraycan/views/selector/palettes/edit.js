@@ -2,7 +2,6 @@ Spraycan.Views.Palettes.Edit = Backbone.View.extend({
   current_color_picker: null,
 
   events: {
-    "submit form": "save",
     "click input.back": "back"
   },
 
@@ -16,14 +15,17 @@ Spraycan.Views.Palettes.Edit = Backbone.View.extend({
   },
 
   save: function(event) {
-    event.preventDefault();
+    if(event!=undefined){
+      event.preventDefault();
+    }
+
     // Spraycan.clear_errors();
 
     attrs = $('form#new-palette-form').serializeObject();
 
     this.model.save(attrs, {
       success: function(model, resp) {
-        Spraycan.reload_frame();
+        Spraycan.reload_styles();
       },
       error: Spraycan.handle_save_error
     });

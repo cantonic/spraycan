@@ -35,7 +35,7 @@
       border: 1px solid #272B2D;
       text-align: left;
       width: 167px;
-      height: 100px;
+      height: 80px;
       overflow: hidden;
       font-size: 12px;
       color: white;
@@ -43,8 +43,8 @@
       padding: 3px 0;
 
       .viewport, .scrollbox {
-        height: 90px !important;
-        padding-bottom: 10px;
+        height: 80px !important;
+        // padding-bottom: 10px;
       }
 
       .scrollbox {
@@ -73,3 +73,4 @@
     }
   }
 }
+

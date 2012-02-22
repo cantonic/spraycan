@@ -7,10 +7,19 @@
             <h3>Create New Theme</h3>
           <% } %>
 
-          <div class="clearfix">
-            <label>Name:</label>
-            <div class="input">
-              <input name="name" type="text" value="<%= theme.name %>">
+          <div class="row clearfix">
+            <div class="span4">
+              <label>Name:</label>
+              <div class="input">
+                <input name="name" type="text" value="<%= theme.name %>">
+              </div>
+            </div>
+
+            <div class="span4">
+              <label>Applies To:</label>
+              <div class="input">
+                <input name="applies_to" type="text" value="<%= theme.applies_to %>">
+              </div>
             </div>
           </div>
 
@@ -22,13 +31,6 @@
               </label>
             </li>
           </ul><br>
-
-        </div>
-        <div class="pull-right">
-          <% if(theme.id==undefined){ %>
-              <div id="file-uploader">
-              </div>
-          <% } %>
         </div>
     </div>
     </fieldset>

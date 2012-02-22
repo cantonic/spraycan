@@ -13,10 +13,10 @@ require Spree::Core::Engine.root.join "app/models/spree/preference"
 class Spraycan::AppConfiguration < Spree::Preferences::Configuration
   preference :base_theme_id, :integer
 
-  preference :favicon_file_name, :string, :default => ''
+  preference :favicon_file_name, :string, :default => '/spraycan/favicon.ico'
 
   preference :logo_file_name, :string, :default => '/assets/admin/bg/spree_50.png'
-  preference :logo_alignment, :string, :default => 'left'
+  preference :logo_alignment, :string, :default => 'center left'
 
   ## BACKGROUND
   preference :background_file_name, :string, :default => ''
@@ -24,31 +24,34 @@ class Spraycan::AppConfiguration < Spree::Preferences::Configuration
   preference :background_repeat,    :string, :default => 'repeat'
 
   ## FONTS
-  preference :title_font, :string, :default => 'Irish Growler'
-  preference :body_font,  :string, :default => 'Rock Salt'
+  preference :title_font, :string, :default => 'Ubuntu'
+  preference :body_font,  :string, :default => 'Ubuntu'
 
   ## FONT SIZES ##
   # Store
-  preference :store_name_font_size,      :integer, :default => 25
+  preference :header_navigation_font_size, :integer, :default => 14
+  preference :horizontal_navigation_font_size, :integer, :default => 16
+  preference :main_navigation_header_font_size, :integer, :default => 14
   preference :main_navigation_font_size, :integer, :default => 12
-  preference :size_navigation_font_size, :integer, :default => 12
 
   # Product Listing
   preference :product_list_name_font_size,        :integer, :default => 12
-  preference :product_list_description_font_size, :integer, :default => 12
-  preference :product_list_price_font_size,       :integer, :default => 12
+  preference :product_list_price_font_size,       :integer, :default => 16
+  preference :product_list_header_font_size,      :integer, :default => 20
+  preference :product_list_search_font_size,      :integer, :default => 14
 
   # Product Details
-  preference :product_detail_name_font_size,        :integer, :default => 12
+  preference :product_detail_name_font_size,        :integer, :default => 24
   preference :product_detail_description_font_size, :integer, :default => 12
-  preference :product_detail_price_font_size,       :integer, :default => 35
-  preference :product_detail_variants_font_size,    :integer, :default => 12
+  preference :product_detail_price_font_size,       :integer, :default => 20
+  preference :product_detail_title_font_size,    :integer, :default => 14
 
   # Basic
-  preference :heading_font_size,      :integer, :default => 12
-  preference :sub_heading_font_size,  :integer, :default => 12
-  preference :button_font_size,       :integer, :default => 12
-  preference :input_box_font_size,    :integer, :default => 12
+  preference :base_font_size,         :integer, :default => 12
+  preference :heading_font_size,      :integer, :default => 24
+  preference :sub_heading_font_size,  :integer, :default => 14
+  preference :button_font_size,       :integer, :default => 13
+  preference :input_box_font_size,    :integer, :default => 13
 
   ## DIGEST
   preference :stylesheet_digest, :string, :default => 'fresh'

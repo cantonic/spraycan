@@ -4,7 +4,7 @@ Spraycan.Views.Fonts.Edit = Backbone.View.extend({
   },
 
   initialize: function(opts) {
-
+    Spraycan.view = this;
 
     this.render();
   },
@@ -34,7 +34,6 @@ Spraycan.Views.Fonts.Edit = Backbone.View.extend({
     $('#title_font').googleFontPicker({
       defaultFont: Spraycan.preferences.title_font,
       callbackFunc: function(fontFamily){
-        $("#"+this.id.split('fontbox')[1]).parent().find('.font-preview').css('fontFamily', fontFamily);   
         $("input#preferred_title_font").val(fontFamily.split(',')[0]);
       }
     });
@@ -42,7 +41,6 @@ Spraycan.Views.Fonts.Edit = Backbone.View.extend({
     $('#body_font').googleFontPicker({
       defaultFont: Spraycan.preferences.body_font,
       callbackFunc: function(fontFamily){
-        $("#"+this.id.split('fontbox')[1]).parent().find('.font-preview').css('fontFamily', fontFamily);   
         $("input#preferred_body_font").val(fontFamily.split(',')[0]);
       }
     });
@@ -55,7 +53,7 @@ Spraycan.Views.Fonts.Edit = Backbone.View.extend({
         range: "min",
         value: size_value,
         min: 1,
-        max: 30,    
+        max: 30,
         slide: function(event, ui) {
           size_el.val(ui.value)
         }
@@ -66,10 +64,13 @@ Spraycan.Views.Fonts.Edit = Backbone.View.extend({
       });
     });
 
+    $('.toolbar nav.actions li.show-hide').show();
   },
 
   save: function(event){
-    event.preventDefault();
+    if(event!=undefined){
+      event.preventDefault();
+    }
     // Spraycan.clear_errors();
 
     attrs = $('form#fonts_form').serializeObject();
@@ -86,7 +87,7 @@ Spraycan.Views.Fonts.Edit = Backbone.View.extend({
 
     Backbone.sync('create', prefs, {
       success: function(model, resp) {
-        Spraycan.reload_frame();
+        Spraycan.reload_styles();
       },
       error: Spraycan.handle_save_error
     });

@@ -1,8 +1,7 @@
 Spraycan.Routers.Selector = Backbone.Router.extend({
   routes: {
  
-    "fonts": "fonts",
-    "images": "images",
+    "save": "save_active",
     "theme?apply=:cid": "apply_theme",
     "cancel_dialog": "cancel_dialog",
   },
@@ -31,16 +30,15 @@ Spraycan.Routers.Selector = Backbone.Router.extend({
   //   Spraycan.set_current('design', 'product_details');
   //   new Spraycan.Views.Shared.GroupIndex({display_name: 'Product Details', group: 'product_details'});
   // },
+  //
 
-  fonts: function(){
-    Spraycan.set_current('fonts', 'edit');
-    new Spraycan.Views.Fonts.Edit();
+  save_active: function(){
+    if(Spraycan.view!=null){
+      Spraycan.view.save()
+    }
+    window.location.href ="#";
   },
 
-  images: function(){
-    Spraycan.set_current('files', 'edit');
-    new Spraycan.Views.Files.Edit();
-  },
 
   apply_theme: function(cid){
     var theme = Spraycan.themes.getByCid(cid);

@@ -1,7 +1,6 @@
 @import "compass";
 @import "compass/typography";
 @import "compass/css3";
-@import "compass/css3/images";
 
 @import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700|PT+Sans+Narrow:400,700&subset=latin,cyrillic);
 
@@ -20,6 +19,7 @@
   bottom: 10px;
   left: 50%;
   margin-left: -213px;
+  min-width: 800px;
 
   .clearfix {
     @include pie-clearfix;
@@ -27,6 +27,57 @@
 
   .hidden {
     display: none;
+  }
+  .visible {
+    display: block;
+  }
+
+  .flash {
+    padding: 10px;
+    padding-top: 12px;
+    color: white;
+    font-family: "PT Sans Caption", sans-serif;    
+    text-transform: none;
+    text-shadow: none;
+    text-align: left;
+    font-size: 13px;
+    position: relative;
+
+    .close {
+      width: 14px;
+      height: 14px;
+      position: absolute;
+      right: 5px;
+      top: 5px;
+    }
+
+    &.success {
+      @include background(none, linear-gradient(#6c9a5c, #588449));
+      border-top: 1px solid #6d9a5c;
+      border-bottom: 1px solid #639352;
+
+      .close {
+        background: url("/assets/spraycan/selector/toolbar/flash-success-close.png") no-repeat center;
+      }
+    }
+    &.error {
+      @include background(none, linear-gradient(#c05456, #993739));
+      border-top: 1px solid #cf6c6e;
+      border-bottom: 1px solid #a53e3f;
+
+      .close {
+        background: url("/assets/spraycan/selector/toolbar/flash-error-close.png") no-repeat center;
+      }
+    }
+    &.notice {
+      @include background(none, linear-gradient(#ffb650, #ff930c));
+      border-top: 1px solid #ffc869;
+      border-bottom: 1px solid #ffa00c;
+
+      .close {
+        background: url("/assets/spraycan/selector/toolbar/flash-notice-close.png") no-repeat center;
+      }
+    }
   }
 
   .vertical-tabs {
@@ -150,11 +201,26 @@
       .save span.icon{
         background-image: url("/assets/spraycan/selector/toolbar/toolbar-save-active.png");
       }
+      .save.error span.icon {
+        background-image: url("/assets/spraycan/selector/toolbar/toolbar-save-error.png");        
+      }
+      .ajax-spinner span.icon {
+        background-image: url("/assets/spraycan/selector/toolbar/ajax-loader.gif"); 
+      }
+
+      .show-hide, .save {
+        &:active {
+          @include box-shadow(0 0 10px 0 #191c1d inset);
+          background-color: #2b2e31;
+        }
+      }
     }
   }
 
   .toolbar {
     border: 1px solid #272b2d;
+    position: absolute;
+    margin-top: -45px;    
 
     .wrap {
       @include background(none, linear-gradient( #565d61, #282c2e ));
@@ -171,6 +237,7 @@
     background-repeat: no-repeat;
     background-image: url("/assets/spraycan/selector/toolbar/content-panel-down-arrow.png");
     padding-bottom: 6px;
+    margin-bottom: 45px;
 
     &.active-layouts {
       background-position: 170px bottom;
@@ -215,6 +282,8 @@
         .section-header {
           padding-bottom: 3px;
           background: url("/assets/spraycan/selector/toolbar/section-header-arrow.png") no-repeat center bottom;
+          position: relative;
+          z-index: 1;
           
           .title {
             text-align: center;
@@ -227,8 +296,12 @@
         .section-body {
           padding: 5px;
           border-left: 1px solid #5a5f62;
+          border-top: 1px solid #5f6568;
+          margin-top: -3px;
           font-size: 12px;
           color: white;
+          position: relative;
+          z-index: 0;
         }
 
       }
@@ -247,26 +320,24 @@
       height: 190px;
       outline: none;
     }
-
-    .jspContainer {        
-      height: 200px !important;
-
-      .jspTrack {
-        @include border-radius(10px);
-        @include box-shadow(0 0 10px 0 #191c1d inset);
-        background-color: #2b2e31;
-        width: 6px !important;
-        padding: 2px !important;
-        padding-bottom: 4px !important;
-        padding-right: 3px;
-
-        .jspDrag {
-          @include border-radius(10px);
-          @include background(none, linear-gradient(#ccd2d7, #7b7f82));
-          border: 1px solid #babdbe !important;
-        }
-      }
-    }
+      
+    // .slimScrollRail {
+    //   @include border-radius(10px !important);
+    //   @include box-shadow(0 0 10px 0 #191c1d inset !important);
+    //   background-color: #2b2e31 !important;
+    //   width: 6px !important;
+    //   padding: 1px 2px !important;      
+    //   opacity: 1 !important;
+    // }
+    // .slimScrollBar {
+    //   @include border-radius(10px  !important);
+    //   @include background-image(linear-gradient(#ccd2d7, #7b7f82) !important);
+    //   border: 1px solid #babdbe !important;
+    //   opacity: 1 !important;
+    //   width: 4px !important;
+    //   right: 7px !important;
+    // }
+    
 
     //--------------------------------------------------------
     // Layouts
@@ -274,18 +345,16 @@
     &.active-layouts {
       width: 640px;
       overflow: hidden;
-      height: 183px;
-
 
       .viewport {
-        height: 140px;
-        margin-top: 3px;
+        // height: 140px;
+        // margin-top: 3px;
       }
 
       .tab{
         overflow: hidden;
         padding-top: 10px;
-        padding-right: 10px; 
+        // padding-right: 10px; 
         padding-bottom: 10px;
       }
 
@@ -376,12 +445,16 @@
     // Colors
     //--------------------------------------------------------
     &.active-colors {
+      width: 644px;
 
       #tab-colors {        
         overflow: hidden;
+        width: 640px;
       }
 
       ul.colors-palettes-list {
+        overflow: auto;
+        padding: 10px;
 
         li {
           width: 100px;
@@ -444,7 +517,7 @@
           }
 
           &.new-palette {
-            height: 79px;
+            height: 78px;
 
             a {
               text-shadow: none;
@@ -489,6 +562,30 @@
                 }
               }
             }
+
+            form {
+              margin-top: 15px;
+              overflow: auto;
+              width: 216px;
+
+              .text-field {
+                float: left;
+
+                .hint {
+                  width: 116px;
+                }
+              }
+
+              input[type="text"] {
+                width: 116px;
+                margin-top: 1px;
+                display: block;
+              }
+              input[type="button"] {
+                float: left;
+                margin-left: 10px;
+              }
+            }
           }
         }
       }
@@ -498,6 +595,7 @@
     // Fonts
     //--------------------------------------------------------
     &.active-fonts {
+      width: 789px;
 
       .tab {
         overflow: hidden;
@@ -512,6 +610,11 @@
         &#section-fonts-preview {
           width: 180px;
           height: 200px;
+          
+          label {
+            padding-bottom: 5px;
+            display: block;
+          }
         }
 
         &:first-child {
@@ -566,14 +669,207 @@
               margin-left: 10px;
             }
           }
-
         }
-
       }
-
     }
 
+    //--------------------------------------------------------
+    // Images
+    //--------------------------------------------------------
+    &.active-images {
+      text-align: center;
+      width: 539px;
+
+      .tab {
+        width: 535px;
+        overflow: hidden;
+      }
+
+      .align, .repeat {
+        h6 {
+          margin-bottom: 5px;
+        }
+      }
+
+      .uploader {
+        @include box-shadow(0 0 10px 0 #383d3e inset);
+        background-color: #454b4e;
+        border-top: 1px solid #373d3e;
+        border-left: 1px solid #373d3e;
+        border-right: 1px solid #494e51;
+        border-bottom: 1px solid #494e51;        
+
+        .state {          
+          text-align: center;
+          padding: 5px 5px 25px 5px;
+          background-position: center 95%;
+          background-repeat: no-repeat;
+          font-family: "PT Sans Caption", sans-serif;
+          font-size: 11px; 
+
+          &.ready {
+            color: #8a9093;
+            line-height: 20px;
+            background-image: url("/assets/spraycan/selector/toolbar/upload-arrow-inactive.png");
+          }
+
+          &.uploading {
+            background-image: url("/assets/spraycan/selector/toolbar/upload-arrow-active.png");
+          }
+
+          &.edit {
+            .chessboard {
+              background: url("/assets/spraycan/selector/toolbar/chessboard.png") repeat;
+              position: relative;
+            }
+            ul.actions {
+              position: absolute;
+              bottom: 0;
+              right: 0;
+              padding: 3px 5px;
+              @include background(none, rgba(68, 75, 78, 0.5));
+
+              li {                
+                a {
+                  font-size: 0;
+                  padding: 3px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      #section-images-favicon {
+        width: 100px;
+
+        .uploader {
+          width: 87px;
+          height: 113px;
+
+          .state {
+            height: 80px;
+
+            &.uploading {
+              .ui-progressbar {
+                margin-top: 30px;
+              }
+            }
+
+            &.edit {
+              width: 87px;
+              height: 113px;
+              padding: 0;
+
+              .chessboard {
+                width: 87px;
+                height: 113px;
+
+                .images-upload-background {
+                  width: 87px;
+                  height: 113px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      #section-images-logo {
+        .uploader {
+          width: 130px;
+          height: 60px;
+
+          .state {
+            &.edit {
+              width: 130px;
+              height: 60px;
+              padding: 0;
+
+              .chessboard {
+                width: 130px;
+                height: 60px;
+
+                .images-upload-background {
+                  width: 130px;
+                  height: 60px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      #section-images-background {
+        width: 290px;
+        
+        .uploader {
+          width: 130px;
+          height: 60px;
+        }
+        
+        .state {
+
+          &.edit {
+            width: 130px;
+            height: 60px;
+            padding: 0;
+
+            .chessboard {
+              width: 130px;
+              height: 60px;
+
+              .images-upload-background {
+                width: 130px;
+                height: 60px;
+              }
+            } 
+          }          
+        }
+        .repeat {
+          width: 130px;
+
+          .values {
+            width: 130px;
+
+            .ui-button {
+              width: 31px;
+            }
+          }
+          
+        }
+        .align {
+          width: 130px;
+          float: right;
+          margin-top: -120px;
+          margin-bottom: 10px;
+
+          .values{
+            width: 126px;
+            height: 95px;
+          }
+        }
+      }
+    }
+  }
+  
+  // Browser specific hacks
+  &.browser-opera {
+    .align .full{
+      .ui-button{
+        margin-bottom: -4px;
+      }
+    }
   }
 
+  &.browser-mozilla {
+    #tab-fonts {
+      max-height: 210px;
+
+      #section-fonts-preview {
+        height: 210px;
+      }
+    }
+  }
 }
 

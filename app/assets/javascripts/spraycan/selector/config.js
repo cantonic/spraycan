@@ -1,5 +1,5 @@
 var Spraycan = {
-  Views: {Shared: {}, Layouts: {}, Palettes: {}, Fonts: {} },
+  Views: {Shared: {}, Layouts: {}, Palettes: {}, Fonts: {}, Images: {} },
   Routers: {},
   Collections: {},
 
@@ -25,7 +25,7 @@ var Spraycan = {
 
   preload: { themes: null },
 
-  preferences: { logo_file_name: null, background_file_name: null, title_font: null, title_font_size: null, body_font: null, body_font_size: null },
+  preferences: { },
 
   rollback: { preferences: {} },
 
@@ -37,6 +37,7 @@ var Spraycan = {
     new Spraycan.Routers.Layouts();
     new Spraycan.Routers.Palettes();
     new Spraycan.Routers.Fonts();
+    new Spraycan.Routers.Images();
 
     Spraycan.reset_collections(); //initializes collection routers aswell
 
@@ -51,15 +52,37 @@ var Spraycan = {
 
     var editor = $("#spreeworks-editor");
 
-    editor.find('.toolbar').width(
-      editor.find('.toolbar').width()
-    );
+
+    if($.browser.webkit){
+      editor.addClass('browser-webkit browser-version-'+$.browser.version);
+    }
+    else if($.browser.msie){
+      editor.addClass('browser-ie browser-version-'+$.browser.version); 
+    }
+    else if($.browser.mozilla){
+      editor.addClass('browser-mozilla browser-version-'+$.browser.version); 
+    }
+    else if($.browser.opera){
+      editor.addClass('browser-opera browser-version-'+$.browser.version); 
+    }
+
+    editor.find('.toolbar nav.actions li.show-hide span.icon').click(function(){    
+      editor.find('.content').hide();
+      editor.find('.toolbar nav.tabs li.active').removeClass('active');
+      $(this).parent().hide();
+    })
 
     editor.draggable({
       handle: 'nav.actions li.drag span.icon',
-      containment: 'window'
+      containment: 'window',
 
+      stop: function(){
+        editor.css({
+          position: 'fixed'
+        })
+      }
     });
+
 
     Spraycan.preload_fonts();
 
@@ -93,6 +116,10 @@ var Spraycan = {
     window.location.href = "#";
   },
 
+  reload_styles: function(){
+    window.frames[0].$('link#compiled_stylesheets').attr('href', '/spraycan/compiled/' + Date.now() + '.css');
+  },
+
   ensure_fetched: function(collection){
     if(!Spraycan.loaded[collection]){
       Spraycan.new_collections[collection] = _.select(Spraycan[collection].models, function(model){
@@ -115,9 +142,9 @@ var Spraycan = {
 
   busy_indicator: function(){
     if(Spraycan.busy.iframe || Spraycan.busy.ajax){
-      $('#busy').show();
+      $('.toolbar nav.actions li.ajax-spinner').show();
     }else{
-      $('#busy').hide();
+      $('.toolbar nav.actions li.ajax-spinner').hide();
     }
   },
 

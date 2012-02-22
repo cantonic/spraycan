@@ -1,3 +1,133 @@
+<div class="tab active" id="tab-images" style="display: block; ">
+
+  <div class="section" id="section-images-favicon">
+    <div class="section-header">
+      <h6 class="title">Favicon</h6>
+    </div>
+    <div class="section-body">
+      <div class="uploader">
+        <div id="favicon_uploader" class="state ready visible">
+          <div class="message">Click here to upload</div>
+        </div>
+        <input type="file" name="file[file]" id="favicon_file" class="hidden">
+        <div class="state uploading hidden">
+          <h6>Uploading.</h6>
+          <div class="progressbar ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left" style="width: 37%; "></div></div>
+        </div>
+        <div class="state edit hidden">
+          <div class="chessboard">
+            <div class="images-upload-background" style="background: no-repeat center;"></div>
+            <ul class="actions inline hidden">
+              <li class="edit"><a href="javascript:void(0);"><img src="/assets/spraycan/selector/toolbar/uploader-zoom.png"></a></li>
+              <li class="delete"><a href="javascript:void(0);"><img src="/assets/spraycan/selector/toolbar/uploader-delete.png"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section" id="section-images-logo">
+    <div class="section-header">
+      <h6 class="title">Logo</h6>
+    </div>
+    <div class="section-body">
+      <div class="uploader">
+        <div id="logo_uploader" class="state ready hidden">
+          <div class="message">Click here to upload</div>
+        </div>
+        <input type="file" name="file[file]" id="logo_file" class="hidden">
+        <div class="state uploading hidden">
+          <h6>Uploading.</h6>
+          <div class="progressbar ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left" style="width: 37%; "></div></div>
+        </div>
+        <div class="state edit visible">
+          <div class="chessboard">
+            <div class="images-upload-background" style=" background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; background-position: 50% 50%; background-repeat: no-repeat; "></div>
+            <ul class="actions inline hidden" style="display: none; ">
+              <li class="edit"><a href="javascript:void(0);"><img src="/assets/spraycan/selector/toolbar/uploader-zoom.png"></a></li>
+              <li class="delete"><a href="javascript:void(0);"><img src="/assets/spraycan/selector/toolbar/uploader-delete.png"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="align">
+        <h6>Align</h6>
+        <div class="values ui-buttonset">
+          <input <%= (Spraycan.preferences.logo_alignment == 'center left') ? 'checked="checked"' : "" %>" id="images-logo-align-left" name="radio[logo][align]" type="radio">
+          <label class="first arrow-center-left" for="images-logo-align-left"></label>
+          <input <%= (Spraycan.preferences.logo_alignment == 'center center') ? 'checked="checked"' : "" %>" id="images-logo-align-center" name="radio[logo][align]" type="radio">
+          <label class="arrow-center-center" for="images-logo-align-center"></label>
+          <input <%= (Spraycan.preferences.logo_alignment == 'center right') ? 'checked="checked"' : "" %>" id="images-logo-align-right" name="radio[logo][align]" type="radio">
+          <label class="last arrow-center-right" for="images-logo-align-right"></label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section" id="section-images-background">
+    <div class="section-header">
+      <h6 class="title">Background</h6>
+    </div>
+    <div class="section-body">
+      <div class="uploader">
+        <div id="background_uploader" class="state ready visible">
+          <div class="message">Click to upload</div>
+        </div>
+        <input type="file" name="file[file]" id="background_file" class="hidden">
+        <div class="state uploading hidden">
+          <h6>Uploading.</h6>
+          <div class="progressbar ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="37"><div class="ui-progressbar-value ui-widget-header ui-corner-left" style="width: 37%; "></div></div>
+        </div>
+        <div class="state edit hidden">
+          <div class="chessboard">
+            <div class="images-upload-background" style="background-image: url(http://subtlepatterns.com/patterns/gun_metal.png); background-position: 50% 0%; background-repeat: repeat; "></div>
+            <ul class="actions inline hidden" style="display: none; ">
+              <li class="zoom"><a href="javascript:void(0);"><img src="/assets/spraycan/selector/toolbar/uploader-zoom.png"></a></li>
+              <li class="delete"><a href="javascript:void(0);"><img src="/assets/spraycan/selector/toolbar/uploader-delete.png"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="repeat">
+        <h6>Repeat</h6>
+        <div class="values ui-buttonset">
+          <input id="images-bg-no-repeat" name="radio[repeat]" type="radio">
+          <label class="first bg-no-repeat" for="images-bg-no-repeat"></label>
+          <input checked="checked" id="images-bg-repeat-x" name="radio[repeat]" type="radio">
+          <label class="bg-repeat-x" for="images-bg-repeat-x"></label>
+          <input id="images-bg-repeat-y" name="radio[repeat]" type="radio">
+          <label class="bg-repeat-y" for="images-bg-repeat-y"></label>
+          <input id="images-bg-repeat" name="radio[repeat]" type="radio">
+          <label class="last bg-repeat" for="images-bg-repeat"></label>
+        </div>
+      </div>
+      <div class="align">
+        <h6>Align</h6>
+        <div class="values full ui-buttonset">
+          <input id="images-bg-align-top-left" name="radio[background][align]" type="radio">
+          <label class="first arrow-top-left" for="images-bg-align-top-left"></label>
+          <input checked="checked" id="images-bg-align-top-center" name="radio[background][align]" type="radio">
+          <label class="arrow-top-center" for="images-bg-align-top-center"></label>
+          <input id="images-bg-align-top-right" name="radio[background][align]" type="radio">
+          <label class="last arrow-top-right" for="images-bg-align-top-right"></label>
+          <input id="images-bg-align-center-left" name="radio[background][align]" type="radio">
+          <label class="first" for="images-bg-align-center-left"></label>
+          <input id="images-bg-align-center-center" name="radio[background][align]" type="radio">
+          <label class="arrow-center-center" for="images-bg-align-center-center"></label>
+          <input id="images-bg-align-center-right" name="radio[background][align]" type="radio">
+          <label class="last arrow-center-right" for="images-bg-align-center-right"></label>
+          <input id="images-bg-align-bottom-left" name="radio[background][align]" type="radio">
+          <label class="first arrow-bottom-left" for="images-bg-align-bottom-left"></label>
+          <input id="images-bg-align-bottom-center" name="radio[background][align]" type="radio">
+          <label class="arrow-bottom-center" for="images-bg-align-bottom-center"></label>
+          <input id="images-bg-align-bottom-right" name="radio[background][align]" type="radio">
+          <label class="last arrow-bottom-right" for="images-bg-align-bottom-right"></label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
 <form id="images_form" class="container" action="#">
   <div class="picker_row">
     <h3>Favicon</h3>
@@ -49,5 +179,4 @@
   <div class="picker_row">
     <button id="save">Save</button>
   </div>
-</form>
-
+</form>-->

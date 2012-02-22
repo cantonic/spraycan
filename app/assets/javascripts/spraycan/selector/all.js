@@ -1,8 +1,7 @@
 //= require spraycan/jquery.min
 //= require spraycan/jquery-ui.min
-//= require spraycan/jquery-file-uploader
-//= require spraycan/jquery.jscrollpane.min
-//= require spraycan/jquery.mousewheel.js
+//= require spraycan/jquery.upload-1.0.2.min
+//= require spraycan/slimscroll.min
 //= require spraycan/inflection
 //= require spraycan/selector/config
 //= require spraycan/selector/init
@@ -23,12 +22,14 @@
 //= require spraycan/routers/selector/layouts
 //= require spraycan/routers/selector/palettes
 //= require spraycan/routers/selector/fonts
+//= require spraycan/routers/selector/images
 //= require spraycan/views/selector/layouts/index
 //= require spraycan/views/selector/palettes/index
 //= require spraycan/views/selector/palettes/edit
 //= require spraycan/views/selector/fonts/edit
+//= require spraycan/views/selector/images/edit
 //= require spraycan/templates/selector/layouts/index
 //= require spraycan/templates/selector/palettes/index
 //= require spraycan/templates/selector/palettes/edit
 //= require spraycan/templates/selector/fonts/edit
-
+//= require spraycan/templates/selector/images/edit

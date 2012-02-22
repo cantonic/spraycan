@@ -33,6 +33,9 @@ Spraycan.Views.Layouts.Index = Backbone.View.extend({
       .show()
       .addClass('active');
 
+
+    $('.toolbar nav.actions li.show-hide').show();
+
     return this;
   },
 
