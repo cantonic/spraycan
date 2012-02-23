@@ -93,6 +93,8 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
         $('#section-images-logo .uploading').removeClass('visible').addClass('hidden')
 
         if(res!="false"){
+          Spraycan.reload_styles();
+
           eval(res);
           Spraycan.rollback.preferences.logo_file_name = Spraycan.preferences.logo_file_name;
           Spraycan.preferences.logo_file_name = filename;
@@ -157,7 +159,7 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
       $('#background_file').trigger('click');
     });
 
-    // handle actual favicon upload
+    // handle actual backgroun upload
     $('#background_file').change(function() {
 
       $('#section-images-background .ready').removeClass('visible').addClass('hidden');
@@ -167,6 +169,8 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
         $('#section-images-background .uploading').removeClass('visible').addClass('hidden')
 
         if(res!="false"){
+          Spraycan.reload_styles();
+
           eval(res);
           Spraycan.rollback.preferences.background_file_name = Spraycan.preferences.background_file_name;
           Spraycan.preferences.background_file_name = filename;

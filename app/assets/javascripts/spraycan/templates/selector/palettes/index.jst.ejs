@@ -3,7 +3,7 @@
     <% _.each(palettes, function(palette) { %>
       <li class="<%= palette.get('active') ? 'active' : '' %>" id="palette-spree">
         <span class="actions hidden">
-          <a class="delete" href="#palette?delete=<%= palette.cid %>&confirm=<%= palette.id==undefined ? 'false' : 'false' %>#"></a>
+          <a class="delete" href="#palette?delete=<%= palette.cid %>&confirm=<%= palette.id==undefined ? 'true' : 'true' %>"></a>
           <a class="edit" href="#palette/<%= palette.cid %>"></a>
         </span>
         <a href="#palette?switch=<%= palette.cid %>">

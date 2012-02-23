@@ -82,8 +82,9 @@ Spraycan.Routers.Base = Backbone.Router.extend({
       $('#dialogs').html(temp({ klass: this.klass.singularize(), warning: 'Are you really sure that you want to delete this ' + this.klass.singularize().humanize().titleize() + '?', cid: cid}));
       $('#confirm-delete').modal({backdrop: true, keyboard: true, show: true})
     }else{
-      $('.modal.in').modal('hide');
-      $('.modal').hide(); //used by tweaker due to lack of bootstrap styles
+      // needs to be made multi-editor aware
+      // $('.modal.in').modal('hide');
+      // $('.modal').hide(); //used by tweaker due to lack of bootstrap styles
 
       var model = Spraycan[this.klass].getByCid(cid);
       Spraycan[this.klass].remove(model);
