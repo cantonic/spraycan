@@ -33,3 +33,4 @@
 //= require spraycan/templates/selector/palettes/edit
 //= require spraycan/templates/selector/fonts/edit
 //= require spraycan/templates/selector/images/edit
+//= require spraycan/templates/shared/confirm_delete

@@ -23,8 +23,6 @@ module Spraycan
       end
 
       # Rails.application.config.active_record.observers = :compile_sweeper
-
-      self.initialize_themes
     end
 
     def self.initialize_themes
@@ -49,6 +47,17 @@ module Spraycan
     initializer "spraycan.environment", :after => :load_environment_config do |app|
       #setup real env object
       app.config.spraycan = Spraycan::Environment.new
+
+      # adds global before_filter that reloads all overrides from DB
+      # this is needed in production where multiple app processes are
+      # rendering so they must have the most recent overrides loaded.
+      #
+      # todo: consider using (a shared) Rails.cache to store overrides,
+      # and re-enabling the old initialize_themes method in 
+      # spraycan/base_controller
+      ActiveSupport.on_load(:action_controller) do
+        before_filter { Spraycan::Engine.initialize_themes }
+      end
     end
 
   end
