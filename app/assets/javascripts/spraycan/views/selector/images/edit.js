@@ -83,6 +83,33 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
       $('#logo_file').trigger('click');
     });
 
+        // handle delete icon click
+    $('div#background_uploader, #section-images-logo .actions .delete').click(function(){
+      $('#section-images-logo .images-upload-logo').css('background-image', 'none');
+      $('#section-images-logo .edit').removeClass('visible').addClass('hidden');
+      $('#section-images-logo .ready').removeClass('hidden').addClass('visible');
+
+
+      //submit perference to server
+      prefs = new Spraycan.Collections.Preferences();
+      prefs.add({
+        configuration: "Spraycan::Config",
+        name: "logo_file_name",
+        value: ""
+      });
+
+      Backbone.sync('create', prefs, {
+        success: function(model, resp) {
+          Spraycan.reload_styles();
+          Spraycan.rollback.preferences.logo_file_name = Spraycan.preferences.logo_file_name;
+          Spraycan.preferences.logo_file_name = "";
+        },
+        error: Spraycan.handle_save_error
+      });
+    });
+
+
+
     // handle actual favicon upload
     $('#logo_file').change(function() {
 
@@ -155,8 +182,34 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
 
     //--------------- BACKGROUND ----------------//
     // wire upload for click
-    $('div#background_uploader, #section-images-background .actions .edit ').click(function(){
+    $('div#background_uploader, #section-images-background .actions .edit').click(function(){
       $('#background_file').trigger('click');
+    });
+
+
+    // handle delete icon click
+    $('div#background_uploader, #section-images-background .actions .delete').click(function(){
+      $('#section-images-background .images-upload-background').css('background-image', 'none');
+      $('#section-images-background .edit').removeClass('visible').addClass('hidden');
+      $('#section-images-background .ready').removeClass('hidden').addClass('visible');
+
+
+      //submit perference to server
+      prefs = new Spraycan.Collections.Preferences();
+      prefs.add({
+        configuration: "Spraycan::Config",
+        name: "background_file_name",
+        value: ""
+      });
+
+      Backbone.sync('create', prefs, {
+        success: function(model, resp) {
+          Spraycan.reload_styles();
+          Spraycan.rollback.preferences.background_file_name = Spraycan.preferences.background_file_name;
+          Spraycan.preferences.background_file_name = "";
+        },
+        error: Spraycan.handle_save_error
+      });
     });
 
     // handle actual backgroun upload

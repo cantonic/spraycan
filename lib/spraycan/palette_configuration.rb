@@ -21,7 +21,7 @@ class Spraycan::AppConfiguration < Spree::Preferences::Configuration
   ## BACKGROUND
   preference :background_file_name, :string, :default => ''
   preference :background_alignment, :string, :default => 'top left'
-  preference :background_repeat,    :string, :default => 'repeat'
+  preference :background_repeat,    :string, :default => 'no-repeat'
 
   ## FONTS
   preference :title_font, :string, :default => 'Ubuntu'
