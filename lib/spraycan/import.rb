@@ -47,9 +47,15 @@ module Spraycan
           Deface::Override.all.clear
           load(file)
 
+
+        end
+      end
+
+
+      def self.import_loaded_overrides(theme)
           Deface::Override.all.values.each do |virtual_path|
             virtual_path.each do |name, override|
-              new_override = @theme.view_overrides.new(:name          => name,
+              new_override = theme.view_overrides.new(:name          => name,
                                               :virtual_path  => override.args[:virtual_path],
                                               :target        => override.action,
                                               :selector      => override.args[override.action],
@@ -67,6 +73,12 @@ module Spraycan
                 if override.args.key? :text
                   new_override.replace_with = "text"
                   new_override.replacement  = override.args[:text]
+                elsif override.args.key? :erb
+                  new_override.replace_with = "erb"
+                  new_override.replacement  = override.args[:erb]
+                elsif override.args.key? :haml
+                  new_override.replace_with = "haml"
+                  new_override.replacement  = override.args[:haml]
                 elsif override.args.key? :partial
                   new_override.replace_with = "partial"
                   new_override.replacement  = override.args[:partial]
@@ -96,8 +108,6 @@ module Spraycan
               new_override.save!
             end
           end
-
-        end
       end
   end
 end
