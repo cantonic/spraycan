@@ -257,12 +257,14 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
         }
       })
     });
-  
+
 
   },
 
   save: function(event){
-    event.preventDefault();
+    if(event!=undefined){
+      event.preventDefault();
+    }
     // Spraycan.clear_errors();
 
     attrs = $('form#images_form').serializeObject();
