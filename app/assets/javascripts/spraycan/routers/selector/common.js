@@ -44,6 +44,13 @@ Spraycan.Routers.Selector = Backbone.Router.extend({
     var theme = Spraycan.themes.getByCid(cid);
     theme.save({active: true}, {
       success: function(model, resp) {
+        //mark other themes in group to inactive
+        _.each(Spraycan.themes.models, function(t){
+          if(theme.get('applies_to')==t.get('applies_to') && theme.cid!=t.cid){
+            t.set({active: false});
+          }
+        });
+
         Spraycan.reload_frame();
         Spraycan.reset_url();
       },
