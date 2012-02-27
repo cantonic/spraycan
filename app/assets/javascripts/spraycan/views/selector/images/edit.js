@@ -30,14 +30,12 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
       .show()
       .addClass('active');
 
-
     // enable edit / delete actions for images
     $(".chessboard").hover(function(){
       $(this).find('ul.actions').show();
     }, function(){
       $(this).find('ul.actions').hide();
     })
-
 
     //setup buttonsets
     $("#section-images-background .align .values, #section-images-background .repeat .values, #section-images-logo .align .values").buttonset();
@@ -83,12 +81,11 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
       $('#logo_file').trigger('click');
     });
 
-        // handle delete icon click
-    $('div#background_uploader, #section-images-logo .actions .delete').click(function(){
+    // handle delete icon click
+    $('#section-images-logo .actions .delete').click(function(){
       $('#section-images-logo .images-upload-logo').css('background-image', 'none');
       $('#section-images-logo .edit').removeClass('visible').addClass('hidden');
       $('#section-images-logo .ready').removeClass('hidden').addClass('visible');
-
 
       //submit perference to server
       prefs = new Spraycan.Collections.Preferences();
@@ -108,11 +105,8 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
       });
     });
 
-
-
     // handle actual favicon upload
     $('#logo_file').change(function() {
-
       $('#section-images-logo .ready').removeClass('visible').addClass('hidden');
       $('#section-images-logo .uploading').removeClass('hidden').addClass('visible');
 
@@ -186,13 +180,11 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
       $('#background_file').trigger('click');
     });
 
-
     // handle delete icon click
-    $('div#background_uploader, #section-images-background .actions .delete').click(function(){
+    $('#section-images-background .actions .delete').click(function(){
       $('#section-images-background .images-upload-background').css('background-image', 'none');
       $('#section-images-background .edit').removeClass('visible').addClass('hidden');
       $('#section-images-background .ready').removeClass('hidden').addClass('visible');
-
 
       //submit perference to server
       prefs = new Spraycan.Collections.Preferences();
@@ -345,7 +337,7 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
       error: Spraycan.handle_save_error
     });
 
- 
+
     return false;
    }
 
