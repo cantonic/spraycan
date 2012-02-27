@@ -14,7 +14,7 @@
             <% _.each(Spraycan.themes.models, function(theme){ %>
               <% if(theme.get('applies_to')==applies_to){ %>
                 <li class="layout-<%= (applies_to + "-" + theme.get('name').dasherize()).toLowerCase() %> <%= theme.get('active') ? 'active' : '' %>">
-                  <a href="#<%= theme.get('active') ? '' : 'theme?apply=' + theme.cid %>">
+                  <a href="#theme?apply=<%= theme.cid %>">
                     <span class="icon"></span><span class="title"><%= theme.get('name') %></span>
                   </a>
                 </li>
