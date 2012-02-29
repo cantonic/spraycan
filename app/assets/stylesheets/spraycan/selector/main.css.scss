@@ -787,19 +787,42 @@
               position: relative;
             }
             ul.actions {
+              @include background(rgba(35, 37, 40, 0.7));
               position: absolute;
+              right: 0px;
               bottom: 0;
-              right: 0;
-              padding: 3px 5px;
-              @include background(none, rgba(68, 75, 78, 0.5));
+              padding: 5px 2px;
 
-              li {                
-                a {
-                  font-size: 0;
-                  padding: 3px;
+              a {
+                display: block;
+                float: right;
+                width: 13px;
+                height: 13px;
+                margin: 1px 5px;
+                background: url("/assets/spraycan/selector/toolbar/edit-delete-palette-icons.png") no-repeat;
+
+                &.edit {
+                  background-position: left center;
+                }
+                &.delete {
+                  background-position: -13px center;
                 }
               }
             }
+            // ul.actions {
+            //   position: absolute;
+            //   bottom: 0;
+            //   right: 0;
+            //   padding: 3px 5px;
+            //   @include background(none, rgba(68, 75, 78, 0.5));
+
+            //   li {                
+            //     a {
+            //       font-size: 0;
+            //       padding: 3px;
+            //     }
+            //   }
+            // }
           }
         }
       }
