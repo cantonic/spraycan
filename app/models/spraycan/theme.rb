@@ -26,14 +26,6 @@ module Spraycan
       self.to_json(:methods => [:source], :only => [:name, :guid, :applies_to])
     end
 
-    def self.import_multiple_from_string(data)
-      data = JSON.parse(data)
-
-      data.each do |theme|
-        self.import_from_json(theme)
-      end
-    end
-
     def self.import_from_string(data)
       self.import_from_json(JSON.parse(data))
     end
@@ -85,7 +77,7 @@ module Spraycan
 
     def source
       @source = {}
-      @source[:view_overrides] = self.view_overrides.map { |s| s.attributes.reject { |key, val| ![:name, :virtual_path, :replace_with, :target, :selector, :closing_selector, :disabled, :replacement].include? key.to_sym } }
+      @source[:view_overrides] = self.view_overrides.map { |s| s.attributes.reject { |key, val| [:id, :theme_id, :updated_at, :created_at].include? key.to_sym } }
       @source[:stylesheets] = self.stylesheets.map { |s| s.attributes.reject { |key, val| ![:name, :css].include? key.to_sym } }
       @source[:javascripts] = self.javascripts.map { |s| s.attributes.reject { |key, val| ![:name, :js].include? key.to_sym } }
       @source[:files] = []

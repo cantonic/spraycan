@@ -20,28 +20,53 @@ namespace :spraycan do
 
   end
 
-  desc 'Dump all themes to a single file'
+  desc 'Dump all themes and palettes to a single file'
   task :dump => :environment do
-    output = []
-    Spraycan::Theme.all.inject(output) do |output, theme|
-      output << JSON.parse(theme.export)
+    output = { :themes => [], :palettes => [], :preferences => {:spraycan => {} } }
+
+    Spraycan::Theme.all.each do |theme|
+      output[:themes] << JSON.parse(theme.export)
     end
 
-    path = File.join(Dir.pwd, 'themes.json')
+    Spraycan::Palette.all.each do |palette|
+      output[:palettes] << JSON.parse(palette.export)
+    end
+
+    output[:preferences][:spraycan] = Spraycan::Config.preferences
+
+    path = File.join(Dir.pwd, 'spraycan.json')
 
     File.open(path, 'w') {|f| f.write(output.to_json) }
 
-    puts "All themes exported to: #{path}"
+    puts "All theme(s), palette(s) and preferences exported to: #{path}"
   end
 
-  desc 'Batch import multiple themes from a single file'
+  desc 'Batch import multiple themes and palettes from a single file'
   task :load => :environment do
 
-    path = File.join(Dir.pwd, 'themes.json')
+    path = File.join(Dir.pwd, 'spraycan.json')
 
     if File.exists? path
-      Spraycan::Theme.import_multiple_from_string(File.open(path).read)
-      puts "Imported theme(s) from #{path}"
+      data = JSON.parse(File.open(path).read)
+
+      data['themes'].each do |theme|
+        Spraycan::Theme.import_from_json(theme)
+      end
+
+      data['palettes'].each do |palette|
+        palette = palette["palette"] if palette.keys.include? "palette"
+        prefs = palette.delete 'preferences'
+
+        p = Spraycan::Palette.create(palette) 
+        prefs.each { |pref, value| p.send "preferred_#{pref}=".to_sym, value }
+      end
+      
+      data['preferences']['spraycan'].each { |pref, value| Spraycan::Config.send "preferred_#{pref}=".to_sym, value }
+
+      debugger
+
+
+      puts "Imported theme(s), palette(s) and preferences from #{path}"
     else
       puts "Could not find import at #{path}"
     end

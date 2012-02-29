@@ -12,6 +12,10 @@ module Spraycan
     before_save :check_active
     after_save :set_digest
 
+    def export
+      self.to_json(:methods => [:preferences], :only => [:name, :active])
+    end
+
     private
       def check_active
         if self.changed.include?('active')

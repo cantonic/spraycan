@@ -27,6 +27,21 @@ module Spraycan
 
     def self.initialize_themes
       if Rails.application.config.deface.enabled
+        #ensure some basic required data is present:
+        unless Spraycan::Palette.exists?
+          Spraycan::Palette.create(:active => true)
+        end
+
+        if Spraycan::Theme.exists?(:applies_to => 'base')
+          theme = Spraycan::Theme.where(:applies_to => 'base').first
+        else
+          theme = Spraycan::Theme.create(:name => 'Base Theme', :applies_to => 'base')
+        end
+
+        Spraycan::Config.preferred_base_theme_id = theme.id
+
+
+
         #clear all WIP overrides, they get reloaded below
         Deface::Override.all.each do |virtual_path, overrides|
           overrides.reject! {|name, override| override.args[:from_editor] }
