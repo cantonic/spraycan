@@ -60,10 +60,8 @@ namespace :spraycan do
         p = Spraycan::Palette.create(palette) 
         prefs.each { |pref, value| p.send "preferred_#{pref}=".to_sym, value }
       end
-      
-      data['preferences']['spraycan'].each { |pref, value| Spraycan::Config.send "preferred_#{pref}=".to_sym, value }
 
-      debugger
+      data['preferences']['spraycan'].each { |pref, value| Spraycan::Config.send "preferred_#{pref}=".to_sym, value }
 
 
       puts "Imported theme(s), palette(s) and preferences from #{path}"
