@@ -509,13 +509,21 @@
               &.active span.icon{
                 background-position: -792px -64px;
               }
-            }
+            }            
             &.layout-cart-double-width { 
               span.icon{
                 background-position: -924px top;
               }
               &.active span.icon{
                 background-position: -924px -64px;
+              }
+            }
+            &.layout-cart-3-in-a-row { 
+              span.icon{
+                background-position: -858px top;
+              }
+              &.active span.icon{
+                background-position: -858px -64px;
               }
             }
           }
