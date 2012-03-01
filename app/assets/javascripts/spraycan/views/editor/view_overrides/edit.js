@@ -169,7 +169,7 @@ Spraycan.Views.ViewOverrides.Edit = Backbone.View.extend({
 
       var field;
 
-      if(target=="set_attributes"){
+      if(target=="set_attributes" || target=="add_to_attributes" || target=="remove_from_attributes"){
         this.show_attributes_editor = true;
 
         this.code_editor = null;

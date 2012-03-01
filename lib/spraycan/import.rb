@@ -65,7 +65,7 @@ module Spraycan
                 new_override.closing_selector = override.args[:closing_selector]
               end 
 
-              if override.action == :set_attributes
+              if [:set_attributes, :add_to_attributes, :remove_from_attributes].include? override.action
                 new_override.replace_with = "attributes"
                 new_override.replacement = override.args[:attributes].inspect rescue '{}'
               else
