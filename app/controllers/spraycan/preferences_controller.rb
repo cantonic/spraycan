@@ -8,7 +8,6 @@ module Spraycan
         config.send "#{param[:name]}=".to_sym, param[:value]
       end
 
-      
       CompileDigest.update_stylesheet_digest
       CompileSweeper.expire_compiled
 

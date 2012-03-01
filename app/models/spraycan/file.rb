@@ -19,6 +19,14 @@ class Spraycan::File < ActiveRecord::Base
     %w{jpg jpeg png gif}.include? name.split('.')[1]
   end
 
+  def width
+    image? ? ((`identify -format "%wx%h" #{self.file.path}`.strip.split('x').first || 0) rescue 0) : 0
+  end
+
+  def height
+    image? ? ((`identify -format "%wx%h" #{self.file.path}`.strip.split('x').last || 0) rescue 0) : 0
+  end
+
   private 
     def set_name
       self.name = file.file.filename

@@ -6,7 +6,6 @@ class Spraycan::ViewOverride < ActiveRecord::Base
     if ['set_attributes', 'add_to_attributes', 'remove_from_attributes'].include? self.target
       #have to parse string to safely get the hash keys +   values
       self.replacement = eval(self.replacement)
- 
 
       self.replace_with = 'attributes'
     end

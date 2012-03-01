@@ -64,7 +64,6 @@ module Spraycan
           local_file = File.open(temp_path, "r")
           theme.files.create(:file => local_file )
           local_file.close
-
         end
 
         true

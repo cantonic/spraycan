@@ -12,12 +12,16 @@
       Spraycan.preload.themes = <%== render(:file => 'spraycan/themes/index.json.rabl') %>;
       Spraycan.preload.palettes = <%== render(:file => 'spraycan/palettes/index.json.rabl') %>;
 
-      Spraycan.preferences.favicon_file_name =  '<%= Spraycan::Config[:favicon_file_name] %>';
-      Spraycan.preferences.logo_file_name = '<%= Spraycan::Config[:logo_file_name] %>';
-      Spraycan.preferences.logo_alignment = '<%= Spraycan::Config[:logo_alignment] %>';
-      Spraycan.preferences.background_file_name = '<%= Spraycan::Config[:background_file_name] %>';
+      Spraycan.preferences.favicon_file_id    = '<%= Spraycan::Config[:favicon_file_id] %>';
+      Spraycan.preferences.favicon_file_url   = '<%= Spraycan::Asset.favicon.url %>'; //not a real preference
+      Spraycan.preferences.logo_file_id       = '<%= Spraycan::Config[:logo_file_id] %>';
+      Spraycan.preferences.logo_file_url      = '<%= Spraycan::Asset.logo.url %>'; //not a real preference
+      Spraycan.preferences.logo_alignment     = '<%= Spraycan::Config[:logo_alignment] %>';
+      Spraycan.preferences.background_file_id = '<%= Spraycan::Config[:background_file_id] %>';
+      Spraycan.preferences.background_file_url= '<%= Spraycan::Asset.background.url %>'; //not a real preference
       Spraycan.preferences.background_alignment = '<%= Spraycan::Config[:background_alignment] %>';
       Spraycan.preferences.background_repeat = '<%= Spraycan::Config[:background_repeat] %>';
+
       Spraycan.preferences.title_font = '<%= Spraycan::Config.title_font %>';
       Spraycan.preferences.body_font = '<%= Spraycan::Config.body_font %>';
 

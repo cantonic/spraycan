@@ -9,6 +9,9 @@ class Spraycan::FilesController < Spraycan::BaseController
     respond_with @files
   end
 
+
+  #sets id to preference passed and returns url
+
   def create
     if @file = Spraycan::File.where(:name => params[:file][:file].original_filename).first
       @file.destroy
@@ -19,11 +22,12 @@ class Spraycan::FilesController < Spraycan::BaseController
 
     if !@file.new_record?
       if params.key? :preference
-        Spraycan::Config.send "#{params[:preference]}=", @file.file.to_s
+        Spraycan::Config.send "#{params[:preference]}=", @file.id
       end
-      render :js => "var filename = '#{@file.file.to_s}'";
+
+      render :json => {:id => @file.id, :url => @file.url }.to_json
     else
-      render :js => "false"
+      render :json => {:id => false }.to_json
     end
   end
 
