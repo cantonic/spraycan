@@ -10,7 +10,7 @@
 #spreeworks-editor {
   @include global-reset;
   font-family: "PT Sans Narrow", sans-serif;
-  font-weight: bold;
+  // font-weight: bold;
   text-transform: uppercase;
   font-size: 13px;
   color: #d9dde1;
@@ -498,6 +498,24 @@
               }
               &.active span.icon{
                 background-position: -726px -64px;                
+              }
+            }
+
+            /* Cart Layouts */
+            &.layout-cart-default { 
+              span.icon{
+                background-position: -792px top;
+              }
+              &.active span.icon{
+                background-position: -792px -64px;
+              }
+            }
+            &.layout-cart-double-width { 
+              span.icon{
+                background-position: -924px top;
+              }
+              &.active span.icon{
+                background-position: -924px -64px;
               }
             }
           }
