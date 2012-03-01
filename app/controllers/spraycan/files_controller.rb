@@ -1,5 +1,5 @@
 class Spraycan::FilesController < Spraycan::BaseController
-  respond_to :js
+  respond_to :json
 
   before_filter :set_theme, :only => [:index, :create]
 
@@ -10,7 +10,12 @@ class Spraycan::FilesController < Spraycan::BaseController
   end
 
   def create
-    @file = @theme.files.create params[:file]
+    if @file = Spraycan::File.where(:name => params[:file][:file].original_filename).first
+      @file.destroy
+      @file = @theme.files.create params[:file]
+    else
+      @file = @theme.files.create params[:file]
+    end
 
     if !@file.new_record?
       if params.key? :preference

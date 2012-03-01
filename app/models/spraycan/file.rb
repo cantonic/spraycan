@@ -12,7 +12,7 @@ class Spraycan::File < ActiveRecord::Base
   end
 
   def url
-    asset_path(self.name)
+    self.file.url
   end
 
   def image?
