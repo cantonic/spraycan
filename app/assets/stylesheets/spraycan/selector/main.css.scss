@@ -1001,6 +1001,16 @@
         height: 210px;
       }
     }
+
+    #tab-colors {
+      #new-palette {
+        #section-palette-name {
+          input.new-palette-field {
+            width: 145px;
+          }
+        }
+      }
+    }
   }
 }
 
