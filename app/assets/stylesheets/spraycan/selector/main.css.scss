@@ -266,7 +266,7 @@
       display: none;
       overflow: auto;
       max-width: 810px;
-      max-height: 200px;
+      max-height: 220px;
 
       .section {
         float: left;
@@ -535,11 +535,11 @@
     // Colors
     //--------------------------------------------------------
     &.active-colors {
-      width: 644px;
+      width: 654px;
 
       #tab-colors {        
         overflow: hidden;
-        width: 640px;
+        width: 650px;
       }
 
       ul.colors-palettes-list {
@@ -624,6 +624,24 @@
       }
 
       #new-palette {
+
+        #section-palette-name {
+          .section-body {
+            height: 70px;
+          }
+
+          .text-field {
+            float: left;
+            margin-top: 20px;
+          }
+
+          input.back {            
+            margin-left: 6px;
+            margin-top: 20px;
+            margin-right: 0;
+          }
+        }
+
         .section {
 
           .section-body {          
