@@ -1,7 +1,7 @@
 module Spraycan
   class Asset
     def self.favicon
-      if @favicon = Spraycan::File.where(:id => Spraycan::Config.favicon_file_id).first
+      if @favicon = Spraycan::File.where(:guid => Spraycan::Config.favicon_file_guid).first
         @favicon
       else
         OpenStruct.new(:url => '')
@@ -9,7 +9,7 @@ module Spraycan
     end
 
     def self.logo
-      if @logo = Spraycan::File.where(:id => Spraycan::Config.logo_file_id).first
+      if @logo = Spraycan::File.where(:guid => Spraycan::Config.logo_file_guid).first
         @logo
       else
         OpenStruct.new(:url => '', :height => 0, :width => 0)
@@ -17,7 +17,7 @@ module Spraycan
     end
 
     def self.background
-      if @background = Spraycan::File.where(:id => Spraycan::Config.background_file_id).first
+      if @background = Spraycan::File.where(:guid => Spraycan::Config.background_file_guid).first
         @background
       else
         OpenStruct.new(:url => '', :height => 0, :width => 0)

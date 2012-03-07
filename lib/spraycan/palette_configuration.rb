@@ -13,13 +13,13 @@ require Spree::Core::Engine.root.join "app/models/spree/preference"
 class Spraycan::AppConfiguration < Spree::Preferences::Configuration
   preference :base_theme_id, :integer
 
-  preference :favicon_file_id, :string
+  preference :favicon_file_guid, :string
 
-  preference :logo_file_id, :integer
+  preference :logo_file_guid, :string
   preference :logo_alignment, :string, :default => 'center left'
 
   ## BACKGROUND
-  preference :background_file_id, :integer
+  preference :background_file_guid, :string
   preference :background_alignment, :string, :default => 'top left'
   preference :background_repeat,    :string, :default => 'no-repeat'
 

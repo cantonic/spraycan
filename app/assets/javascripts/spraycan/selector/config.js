@@ -1,5 +1,5 @@
 var Spraycan = {
-  Views: {Shared: {}, Layouts: {}, Palettes: {}, Fonts: {}, Images: {} },
+  Views: {Shared: {}, Layouts: {}, Palettes: {}, Fonts: {}, Images: {}, Packs: {} },
   Routers: {},
   Collections: {},
 
@@ -32,20 +32,17 @@ var Spraycan = {
   init: function() {
     Spraycan.themes = new Spraycan.Collections.Themes();
     Spraycan.palettes = new Spraycan.Collections.Palettes();
+    Spraycan.packs = new Spraycan.Collections.Packs();
 
     new Spraycan.Routers.Selector();
     new Spraycan.Routers.Layouts();
     new Spraycan.Routers.Palettes();
     new Spraycan.Routers.Fonts();
     new Spraycan.Routers.Images();
+    new Spraycan.Routers.Packs();
 
     Spraycan.reset_collections(); //initializes collection routers aswell
-
-    Spraycan.themes.reset(Spraycan.preload.themes);
-    Spraycan.loaded.themes = true;
-
-    Spraycan.palettes.reset(Spraycan.preload.palettes);
-    Spraycan.loaded.palettes = true;
+    Spraycan.preload();
 
 
     Backbone.history.start();
@@ -88,6 +85,17 @@ var Spraycan = {
 
   },
 
+  preload: function(){
+    Spraycan.themes.reset(Spraycan.preload.themes);
+    Spraycan.loaded.themes = true;
+
+    Spraycan.palettes.reset(Spraycan.preload.palettes);
+    Spraycan.loaded.palettes = true;
+
+    Spraycan.packs.reset(Spraycan.preload.packs);
+    Spraycan.loaded.packs = true;
+  },
+
   reset_collections: function(){
     Spraycan.loaded = { themes: false, palettes: false };
 
@@ -104,8 +112,24 @@ var Spraycan = {
     Spraycan.current_action = action;
   },
 
-  refresh_toolbar: function(){
-    // not used
+  refresh_toolbar: function(current){
+    $("#spreeworks-editor .tabs .active").removeClass('active');
+    $("#spreeworks-editor .tabs ." + current).addClass('active');
+
+    $("#spreeworks-editor .content")
+        .removeClass('active-layouts active-colors active-fonts active-images active-packs')
+        .addClass('active-' + current)
+        .find(".tab.active")
+        .hide()
+        .removeClass('active');
+
+    $("#spreeworks-editor .content")
+      .show()
+      .find(".tab#tab-" + current)
+      .show()
+      .addClass('active');
+
+    $('.toolbar nav.actions li.show-hide').show();
   },
 
   reload_frame: function(){

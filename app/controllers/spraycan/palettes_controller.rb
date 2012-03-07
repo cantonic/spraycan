@@ -20,9 +20,7 @@ class Spraycan::PalettesController < Spraycan::BaseController
   end
 
   def destroy
-    Spraycan::Palette.destroy(params[:id]).to_s
-
-    render :js => true
+    render :json => Spraycan::Palette.destroy(params[:id])
   end
 
 end

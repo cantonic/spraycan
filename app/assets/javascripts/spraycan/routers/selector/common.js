@@ -1,6 +1,5 @@
 Spraycan.Routers.Selector = Backbone.Router.extend({
   routes: {
-
     "save": "save_active",
     "theme?apply=:cid": "apply_theme",
     "cancel_dialog": "cancel_dialog",

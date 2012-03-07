@@ -1,5 +1,6 @@
 module Spraycan
   class BootController < Spraycan::BaseController
+    before_filter :load_objects, :only => [:state]
 
     def editor
       #editor boot method
@@ -14,8 +15,7 @@ module Spraycan
       if session[:full]
         render :action => "editor", :layout => false
       else
-        @themes = Theme.all
-        @palettes = Palette.all
+        load_objects
 
         render :action => "selector", :layout => false
       end
@@ -25,6 +25,14 @@ module Spraycan
       session[:full] = !session[:full]
       redirect_to '/spraycan#'
     end
+
+
+    private
+      def load_objects
+        @themes = Theme.all
+        @palettes = Palette.all
+        @packs = Pack.all
+      end
 
   end
 end

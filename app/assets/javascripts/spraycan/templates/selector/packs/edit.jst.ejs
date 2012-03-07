@@ -1,0 +1,28 @@
+<div class="tab nano active" id="tab-themes" style="display: block; ">
+  <div class="hidden palette-default" id="new-theme" style="display: block; ">
+    <form id="new-theme-form" action="#">
+      <div class="section" id="section-source">
+        <div class="section-header">
+          <h6 class="title">Source</h6>
+        </div>
+        <div class="section-body">
+          <input type="checkbox" name="import" checked>
+          <p>Save editors current state</p>
+        </div>
+      </div>
+      <div class="section" id="section-theme-name">
+        <div class="section-header">
+          <h6 class="title">Theme name</h6>
+        </div>
+        <div class="section-body">
+          <form action="#" id="new-theme-form" method="post">
+            <div class="text-field">
+              <input class="new-theme-field" name="name" size="20" type="text" value="<%= pack.name %>">
+            </div>
+            <input class="back" type="button" value="Back">
+          </form>
+        </div> 
+      </div>
+    </form>
+  </div>
+</div>

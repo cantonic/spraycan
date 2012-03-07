@@ -22,10 +22,10 @@ class Spraycan::FilesController < Spraycan::BaseController
 
     if !@file.new_record?
       if params.key? :preference
-        Spraycan::Config.send "#{params[:preference]}=", @file.id
+        Spraycan::Config.send "#{params[:preference]}=", @file.guid
       end
 
-      render :json => {:id => @file.id, :url => @file.url }.to_json
+      render :json => {:id => @file.id, :guid => @file.guid, :url => @file.url }.to_json
     else
       render :json => {:id => false }.to_json
     end

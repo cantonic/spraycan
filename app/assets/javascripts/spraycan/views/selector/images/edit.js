@@ -14,21 +14,7 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
     $(this.el).html(compiled());
     $('#main').html(this.el);
 
-    $("#spreeworks-editor .tabs .active").removeClass('active');
-    $("#spreeworks-editor .tabs .images").addClass('active');
-
-    $("#spreeworks-editor .content")
-      .removeClass('active-layouts active-colors active-fonts active-images')
-      .addClass('active-images')
-      .find(".tab.active")
-      .hide()
-      .removeClass('active');
-
-    $("#spreeworks-editor .content")
-      .show()
-      .find(".tab#tab-images")
-      .show()
-      .addClass('active');
+    Spraycan.refresh_toolbar('images');
 
     // enable edit / delete actions for images
     $(".chessboard").hover(function(){
@@ -57,15 +43,15 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
       prefs = new Spraycan.Collections.Preferences();
       prefs.add({
         configuration: "Spraycan::Config",
-        name: "favicon_file_id",
+        name: "favicon_file_guid",
         value: 0
       });
 
       Backbone.sync('create', prefs, {
         success: function(model, resp) {
           Spraycan.reload_styles();
-          Spraycan.rollback.preferences.favicon_file_id = Spraycan.preferences.favicon_file_id;
-          Spraycan.preferences.favicon_file_id = 0;
+          Spraycan.rollback.preferences.favicon_file_guid = Spraycan.preferences.favicon_file_guid;
+          Spraycan.preferences.favicon_file_guid = 0;
           Spraycan.rollback.preferences.favicon_file_url = Spraycan.preferences.favicon_file_url;
           Spraycan.preferences.favicon_file_url = "";       },
         error: Spraycan.handle_save_error
@@ -78,12 +64,12 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
       $('#section-images-favicon .ready').removeClass('visible').addClass('hidden');
       $('#section-images-favicon .uploading').removeClass('hidden').addClass('visible');
 
-      $(this).upload('/spraycan/themes/' + Spraycan.theme_id + '/files.json', { 'preference': 'favicon_file_id' }, function(res) {
+      $(this).upload('/spraycan/themes/' + Spraycan.theme_id + '/files.json', { 'preference': 'favicon_file_guid' }, function(res) {
         $('#section-images-favicon .uploading').removeClass('visible').addClass('hidden')
 
         if(res.id!="false"){
-          Spraycan.rollback.preferences.favicon_file_id = Spraycan.preferences.favicon_file_id;
-          Spraycan.preferences.favicon_file_id = res.id;
+          Spraycan.rollback.preferences.favicon_file_guid = Spraycan.preferences.favicon_file_guid;
+          Spraycan.preferences.favicon_file_guid = res.guid;
           Spraycan.rollback.preferences.favicon_file_url = Spraycan.preferences.favicon_file_url;
           Spraycan.preferences.favicon_file_url = res.url;
 
@@ -117,15 +103,15 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
       prefs = new Spraycan.Collections.Preferences();
       prefs.add({
         configuration: "Spraycan::Config",
-        name: "logo_file_id",
+        name: "logo_file_guid",
         value: 0
       });
 
       Backbone.sync('create', prefs, {
         success: function(model, resp) {
           Spraycan.reload_styles();
-          Spraycan.rollback.preferences.logo_file_id = Spraycan.preferences.logo_file_id;
-          Spraycan.preferences.logo_file_id = 0;
+          Spraycan.rollback.preferences.logo_file_guid = Spraycan.preferences.logo_file_guid;
+          Spraycan.preferences.logo_file_guid = 0;
           Spraycan.rollback.preferences.logo_file_url = Spraycan.preferences.logo_file_url;
           Spraycan.preferences.logo_file_url = "";       },
         error: Spraycan.handle_save_error
@@ -137,15 +123,15 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
       $('#section-images-logo .ready').removeClass('visible').addClass('hidden');
       $('#section-images-logo .uploading').removeClass('hidden').addClass('visible');
 
-      $(this).upload('/spraycan/themes/' + Spraycan.theme_id + '/files.js', { 'preference': 'logo_file_id' }, function(res) {
+      $(this).upload('/spraycan/themes/' + Spraycan.theme_id + '/files.js', { 'preference': 'logo_file_guid' }, function(res) {
         $('#section-images-logo .uploading').removeClass('visible').addClass('hidden')
 
 
         if(res.id!="false"){
           Spraycan.reload_styles();
 
-          Spraycan.rollback.preferences.logo_file_id = Spraycan.preferences.logo_file_id;
-          Spraycan.preferences.logo_file_id = res.id;
+          Spraycan.rollback.preferences.logo_file_guid = Spraycan.preferences.logo_file_guid;
+          Spraycan.preferences.logo_file_guid = res.guid;
           Spraycan.rollback.preferences.logo_file_url = Spraycan.preferences.logo_file_url;
           Spraycan.preferences.logo_file_url = res.url;
 
@@ -219,15 +205,15 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
       prefs = new Spraycan.Collections.Preferences();
       prefs.add({
         configuration: "Spraycan::Config",
-        name: "background_file_id",
+        name: "background_file_guid",
         value: 0
       });
 
       Backbone.sync('create', prefs, {
         success: function(model, resp) {
           Spraycan.reload_styles();
-          Spraycan.rollback.preferences.background_file_id = Spraycan.preferences.background_file_id;
-          Spraycan.preferences.background_file_id = 0;
+          Spraycan.rollback.preferences.background_file_guid = Spraycan.preferences.background_file_guid;
+          Spraycan.preferences.background_file_guid = 0;
 
           Spraycan.rollback.preferences.background_file_url = Spraycan.preferences.background_file_url;
           Spraycan.preferences.background_file_url = "";
@@ -242,14 +228,14 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
       $('#section-images-background .ready').removeClass('visible').addClass('hidden');
       $('#section-images-background .uploading').removeClass('hidden').addClass('visible');
 
-      $(this).upload('/spraycan/themes/' + Spraycan.theme_id + '/files.js', { 'preference': 'background_file_id' }, function(res) {
+      $(this).upload('/spraycan/themes/' + Spraycan.theme_id + '/files.js', { 'preference': 'background_file_guid' }, function(res) {
         $('#section-images-background .uploading').removeClass('visible').addClass('hidden')
 
         if(res.id!="false"){
           Spraycan.reload_styles();
 
-          Spraycan.rollback.preferences.background_file_id = Spraycan.preferences.background_file_id;
-          Spraycan.preferences.background_file_id = res.id;
+          Spraycan.rollback.preferences.background_file_guid = Spraycan.preferences.background_file_guid;
+          Spraycan.preferences.background_file_guid = res.guid;
           Spraycan.rollback.preferences.background_file_url = Spraycan.preferences.background_file_url;
           Spraycan.preferences.background_file_url = res.url;
 

@@ -1,6 +1,6 @@
-Spraycan.Views.Palettes.Index = Backbone.View.extend({
+Spraycan.Views.Packs.Index = Backbone.View.extend({
   events: {
-    "click li#palette-spree a": "show_selected"
+    "click li#pack a": "show_selected"
   },
 
   initialize: function() {
@@ -8,14 +8,14 @@ Spraycan.Views.Palettes.Index = Backbone.View.extend({
   },
 
   render: function() {
-    var compiled = JST['spraycan/templates/selector/palettes/index'];
+    var compiled = JST['spraycan/templates/selector/packs/index'];
 
-    $(this.el).html(compiled({ palettes : Spraycan.palettes.models }));
+    $(this.el).html(compiled({ packs : Spraycan.packs.models }));
 
     $('#main').html(this.el);
 
 
-    Spraycan.refresh_toolbar('colors');
+    Spraycan.refresh_toolbar('themes');
 
     return this;
   },

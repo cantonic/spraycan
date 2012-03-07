@@ -1,6 +1,7 @@
 Spraycan::Engine.routes.draw do
   root :to => 'boot#editor'
   match '/toggle', :to => 'boot#toggle'
+  match '/state', :to => 'boot#state'
 
   match '/compiled/:digest.:action', :controller => :compiler
 
@@ -18,5 +19,6 @@ Spraycan::Engine.routes.draw do
   end
 
   resources :palettes
+  resources :packs, :only => [:index, :create, :update, :destroy]
   resources :preferences, :only => [:create]
 end

@@ -3,7 +3,7 @@ ActionView::Template.class_eval do
   alias_method :without_spraycan_initialize, :initialize
 
   def initialize(source, identifier, handler, details)
-    if handler.class.name.include? "ERB"
+    if details[:format].to_s == "text/html"
       doc = Deface::Parser.convert(source.clone)
 
       inject = <<-text

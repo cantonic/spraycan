@@ -5,7 +5,8 @@ class Spraycan::File < ActiveRecord::Base
 
   mount_uploader :file, GraphicUploader
 
-  before_save :set_name
+  validates :guid, :presence => true, :uniqueness => true
+  before_validation :set_name_and_guid
 
   def body
     self.file.read
@@ -28,7 +29,8 @@ class Spraycan::File < ActiveRecord::Base
   end
 
   private 
-    def set_name
+    def set_name_and_guid
       self.name = file.file.filename
+      self.guid ||= Guid.new.to_s
     end
 end

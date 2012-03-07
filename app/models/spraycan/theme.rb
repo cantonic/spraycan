@@ -10,6 +10,8 @@ module Spraycan
     has_many :javascripts, :dependent => :destroy
     has_many :files, :dependent => :destroy
 
+    has_and_belongs_to_many :packs, :join_table => 'spraycan_packs_themes'
+
     validates :name, :presence => true
     validates :guid, :presence => true, :uniqueness => true
 
@@ -17,10 +19,13 @@ module Spraycan
     scope :active, where(:active => true)
 
     before_validation :set_guid
+    before_save :check_active
 
     acts_as_list
 
     after_save :set_digest
+
+    before_destroy { packs.clear }
 
     def export
       self.to_json(:methods => [:source], :only => [:name, :guid, :applies_to])
@@ -39,9 +44,7 @@ module Spraycan
         return false
       end
 
-      if Spraycan::Theme.exists?(:guid => data["guid"])
-        Spraycan::Theme.where(:guid => data["guid"])[0].destroy
-      end
+      Spraycan::Theme.delete_all(:guid => data["guid"])
 
       theme = Spraycan::Theme.new
 
@@ -55,14 +58,19 @@ module Spraycan
         data["source"]["javascripts"].each { |javascript| theme.javascripts.create(javascript) }
 
         data["source"]["files"].each do |file|
+          debugger
           s = StringIO.new(ActiveSupport::Base64.decode64(file["data"]))
           z = Zlib::GzipReader.new(s)
 
-          temp_path = File.join([Rails.root, "tmp", file["file_name"]])
-          File.open(temp_path, "w") {|f| f.write(z.read) }
+          temp_path = ::File.join([Rails.root, "tmp", file["file_name"]])
+          ::File.open(temp_path, "w") {|f| f.write(z.read) }
 
-          local_file = File.open(temp_path, "r")
-          theme.files.create(:file => local_file )
+          if file.key? 'guid'
+            Spraycan::File.delete_all(:guid => file["guid"])
+          end
+
+          local_file = ::File.open(temp_path, "r")
+          theme.files.create(:file => local_file, :guid => file["guid"])
           local_file.close
         end
 
@@ -70,8 +78,6 @@ module Spraycan
       else
         false
       end
-    rescue Exception => e
-      false
     end
 
     def source
@@ -81,8 +87,8 @@ module Spraycan
       @source[:javascripts] = self.javascripts.map { |s| s.attributes.reject { |key, val| ![:name, :js].include? key.to_sym } }
       @source[:files] = []
 
-      self.files.each do |file|
-        file = file.file.file #meta huh? location location location!
+      self.files.each do |f|
+        file = f.file.file #meta huh? location location location!
         next if file.nil? || !file.exists?
 
         data = StringIO.new
@@ -90,7 +96,7 @@ module Spraycan
         z.write file.read
         z.close
 
-        @source[:files] << { :file_name => file.filename,
+        @source[:files] << { :file_name => file.filename, :guid => f.guid,
           :data => ActiveSupport::Base64.encode64(data.string) }
       end
 
@@ -98,6 +104,12 @@ module Spraycan
     end
 
     private
+      def check_active
+        if self.changed.include?('active') && self.active? && self.applies_to.present?
+          Theme.where(:applies_to => self.applies_to).update_all(:active => false)
+        end
+      end
+
       def set_guid
         self.guid ||= Guid.new.to_s
       end

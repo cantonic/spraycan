@@ -22,7 +22,7 @@ namespace :spraycan do
 
   desc 'Dump all themes and palettes to a single file'
   task :dump => :environment do
-    output = { :themes => [], :palettes => [], :preferences => {:spraycan => {} } }
+    output = { :themes => [], :palettes => [], :preferences => {:spraycan => {} }, :packs => [] }
 
     Spraycan::Theme.all.each do |theme|
       output[:themes] << JSON.parse(theme.export)
@@ -33,6 +33,10 @@ namespace :spraycan do
     end
 
     output[:preferences][:spraycan] = Spraycan::Config.preferences
+
+    Spraycan::Pack.all.each do |pack|
+      output[:packs] << JSON.parse(pack.export)
+    end
 
     path = File.join(Dir.pwd, 'spraycan.json')
 
@@ -63,10 +67,41 @@ namespace :spraycan do
 
       data['preferences']['spraycan'].each { |pref, value| Spraycan::Config.send "preferred_#{pref}=".to_sym, value }
 
+      data['packs'].each do |pack|
+        pack = pack["pack"] if pack.keys.include? "pack"
+        prefs = pack.delete 'preferences'
+        theme_guids = pack.delete 'theme_guids'
+
+        p = Spraycan::Pack.new(pack)
+        active = p.active
+        p.active = false
+        p.preference_hash = prefs.to_s
+        p.save
+
+        theme_guids.each do |guid|
+          if theme = Spraycan::Theme.where(:guid => guid).first
+            p.themes << theme
+          end
+        end
+
+        if active
+          p.active = true
+          p.save
+        end
+      end
 
       puts "Imported theme(s), palette(s) and preferences from #{path}"
     else
       puts "Could not find import at #{path}"
     end
   end
+
+  desc 'DELETES all spraycan models'
+  task :clear => :environment do
+    Spraycan::Theme.destroy_all
+    Spraycan::Palette.destroy_all
+    Spraycan::Pack.destroy_all
+  end
+
+
 end

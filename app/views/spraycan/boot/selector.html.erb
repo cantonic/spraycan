@@ -7,45 +7,7 @@
     <script type="text/javascript">
       Spraycan.public_file_path = '/spraycan/';
     </script>
-    <script type="text/javascript">
-      Spraycan.theme_id = <%= Spraycan::Config.preferred_base_theme_id %>;
-      Spraycan.preload.themes = <%== render(:file => 'spraycan/themes/index.json.rabl') %>;
-      Spraycan.preload.palettes = <%== render(:file => 'spraycan/palettes/index.json.rabl') %>;
-
-      Spraycan.preferences.favicon_file_id    = '<%= Spraycan::Config[:favicon_file_id] %>';
-      Spraycan.preferences.favicon_file_url   = '<%= Spraycan::Asset.favicon.url %>'; //not a real preference
-      Spraycan.preferences.logo_file_id       = '<%= Spraycan::Config[:logo_file_id] %>';
-      Spraycan.preferences.logo_file_url      = '<%= Spraycan::Asset.logo.url %>'; //not a real preference
-      Spraycan.preferences.logo_alignment     = '<%= Spraycan::Config[:logo_alignment] %>';
-      Spraycan.preferences.background_file_id = '<%= Spraycan::Config[:background_file_id] %>';
-      Spraycan.preferences.background_file_url= '<%= Spraycan::Asset.background.url %>'; //not a real preference
-      Spraycan.preferences.background_alignment = '<%= Spraycan::Config[:background_alignment] %>';
-      Spraycan.preferences.background_repeat = '<%= Spraycan::Config[:background_repeat] %>';
-
-      Spraycan.preferences.title_font = '<%= Spraycan::Config.title_font %>';
-      Spraycan.preferences.body_font = '<%= Spraycan::Config.body_font %>';
-
-      Spraycan.preferences.header_navigation_font_size = '<%= Spraycan::Config.header_navigation_font_size %>';
-      Spraycan.preferences.horizontal_navigation_font_size = '<%= Spraycan::Config.horizontal_navigation_font_size %>';
-      Spraycan.preferences.main_navigation_header_font_size = '<%= Spraycan::Config.main_navigation_header_font_size %>';
-      Spraycan.preferences.main_navigation_font_size = '<%= Spraycan::Config.main_navigation_font_size %>';
-
-      Spraycan.preferences.product_list_name_font_size = '<%= Spraycan::Config.product_list_name_font_size %>';
-      Spraycan.preferences.product_list_price_font_size = '<%= Spraycan::Config.product_list_price_font_size %>';
-      Spraycan.preferences.product_list_header_font_size = '<%= Spraycan::Config.product_list_header_font_size %>';
-      Spraycan.preferences.product_list_search_font_size = '<%= Spraycan::Config.product_list_search_font_size %>';
-
-      Spraycan.preferences.product_detail_name_font_size = '<%= Spraycan::Config.product_detail_name_font_size %>';
-      Spraycan.preferences.product_detail_description_font_size = '<%= Spraycan::Config.product_detail_description_font_size %>';
-      Spraycan.preferences.product_detail_price_font_size = '<%= Spraycan::Config.product_detail_price_font_size %>';
-      Spraycan.preferences.product_detail_title_font_size = '<%= Spraycan::Config.product_detail_title_font_size %>';
-
-      Spraycan.preferences.base_font_size = '<%= Spraycan::Config.base_font_size %>';
-      Spraycan.preferences.heading_font_size = '<%= Spraycan::Config.heading_font_size %>';
-      Spraycan.preferences.sub_heading_font_size = '<%= Spraycan::Config.sub_heading_font_size %>';
-      Spraycan.preferences.button_font_size = '<%= Spraycan::Config.button_font_size %>';
-      Spraycan.preferences.input_box_font_size = '<%= Spraycan::Config.input_box_font_size %>';
-    </script>
+    <%= javascript_include_tag '/spraycan/state', :id => 'selector_state' %>
   </head>
   <body>
     <div id="spreeworks-editor" class="ui-draggable">
@@ -73,6 +35,7 @@
           </nav>
           <nav class="tabs">
             <ul>
+              <li class="themes"><a href="#tab-themes">Themes</a></li>
               <li class="layouts"><a href="#tab-layouts">Layouts</a></li>
               <li class="colors"><a href="#tab-colors">Colors</a></li>
               <li class="fonts"><a href="#tab-fonts">Fonts</a></li>
