@@ -28,7 +28,7 @@ module Spraycan
     before_destroy { packs.clear }
 
     def export
-      self.to_json(:methods => [:source], :only => [:name, :guid, :applies_to])
+      self.to_json(:methods => [:source], :only => [:name, :guid, :applies_to, :position])
     end
 
     def self.import_from_string(data)
@@ -58,7 +58,6 @@ module Spraycan
         data["source"]["javascripts"].each { |javascript| theme.javascripts.create(javascript) }
 
         data["source"]["files"].each do |file|
-          debugger
           s = StringIO.new(ActiveSupport::Base64.decode64(file["data"]))
           z = Zlib::GzipReader.new(s)
 

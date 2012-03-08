@@ -20,8 +20,6 @@ class CreateThemes < ActiveRecord::Migration
       t.integer :position, :default => 0
       t.timestamps
     end
-    Spraycan::Theme.reset_column_information
-    theme = Spraycan::Theme.create(:name => "Site Theme", :active => true)
   end
 
   def self.down

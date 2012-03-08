@@ -113,23 +113,25 @@ var Spraycan = {
   },
 
   refresh_toolbar: function(current){
-    $("#spreeworks-editor .tabs .active").removeClass('active');
-    $("#spreeworks-editor .tabs ." + current).addClass('active');
+    if(current!=undefined){
+      $("#spreeworks-editor .tabs .active").removeClass('active');
+      $("#spreeworks-editor .tabs ." + current).addClass('active');
 
-    $("#spreeworks-editor .content")
-        .removeClass('active-layouts active-colors active-fonts active-images active-packs')
-        .addClass('active-' + current)
-        .find(".tab.active")
-        .hide()
-        .removeClass('active');
+      $("#spreeworks-editor .content")
+          .removeClass('active-layouts active-colors active-fonts active-images active-packs')
+          .addClass('active-' + current)
+          .find(".tab.active")
+          .hide()
+          .removeClass('active');
 
-    $("#spreeworks-editor .content")
-      .show()
-      .find(".tab#tab-" + current)
-      .show()
-      .addClass('active');
+      $("#spreeworks-editor .content")
+        .show()
+        .find(".tab#tab-" + current)
+        .show()
+        .addClass('active');
 
-    $('.toolbar nav.actions li.show-hide').show();
+      $('.toolbar nav.actions li.show-hide').show();
+    }
   },
 
   reload_frame: function(){

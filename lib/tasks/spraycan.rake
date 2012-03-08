@@ -75,7 +75,7 @@ namespace :spraycan do
         p = Spraycan::Pack.new(pack)
         active = p.active
         p.active = false
-        p.preference_hash = prefs.to_s
+        p.preference_hash = prefs.to_json
         p.save
 
         theme_guids.each do |guid|

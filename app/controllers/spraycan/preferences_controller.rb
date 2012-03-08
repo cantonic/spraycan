@@ -9,7 +9,6 @@ module Spraycan
       end
 
       CompileDigest.update_stylesheet_digest
-      CompileSweeper.expire_compiled
 
       #not sure what to return here
       render :json => { :all => 'good' }.to_json

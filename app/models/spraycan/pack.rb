@@ -16,7 +16,7 @@ module Spraycan
         self.palette_guid = palette.guid
       end
 
-      self.preference_hash = Spraycan::Config.preferences.to_s
+      self.preference_hash = Spraycan::Config.preferences.to_json
       self.save
     end
 
@@ -31,7 +31,7 @@ module Spraycan
     end
 
     def preferences
-      self.preference_hash.present? ? eval(self.preference_hash) : {}
+      self.preference_hash.present? ? JSON.parse(self.preference_hash) : {}
     end
 
     def export
