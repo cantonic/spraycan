@@ -1,7 +1,7 @@
 Spraycan.theme_id = <%= Spraycan::Config.preferred_base_theme_id %>;
-Spraycan.preload.themes = <%== render(:file => 'spraycan/themes/index.json.rabl') %>;
-Spraycan.preload.palettes = <%== render(:file => 'spraycan/palettes/index.json.rabl') %>;
-Spraycan.preload.packs = <%== render(:file => 'spraycan/packs/index.json.rabl') %>;
+Spraycan.preload.themes = <%== @themes_json %>;
+Spraycan.preload.palettes = <%== @palettes_json %>;
+Spraycan.preload.packs = <%== @packs_json %>;
 
 Spraycan.preferences.favicon_file_guid    = '<%= Spraycan::Config[:favicon_file_guid] %>';
 Spraycan.preferences.favicon_file_url   = '<%= Spraycan::Asset.favicon.url %>'; //not a real preference

@@ -1,6 +1,5 @@
 module Spraycan
   class BootController < Spraycan::BaseController
-    before_filter :load_objects, :only => [:state]
 
     def editor
       #editor boot method
@@ -26,6 +25,14 @@ module Spraycan
       redirect_to '/spraycan#'
     end
 
+    def state
+      load_objects
+      @themes_json = render_to_string(:file => 'spraycan/themes/index.json.rabl') 
+      @palettes_json = render_to_string(:file => 'spraycan/palettes/index.json.rabl')
+      @packs_json = render_to_string(:file => 'spraycan/packs/index.json.rabl')
+
+      respond_to :js 
+    end
 
     private
       def load_objects
