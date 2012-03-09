@@ -75,6 +75,11 @@ module Spraycan
       end
     end
 
+    # sets the manifests / assets to be precompiled
+    initializer "spree.assets.precompile" do |app|
+      app.config.assets.precompile += ['spraycan/editor/all.*', 'spraycan/editor/embed.*', 'spraycan/selector/all.*']
+    end
+
   end
 end
 

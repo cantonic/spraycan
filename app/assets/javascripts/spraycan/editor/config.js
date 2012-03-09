@@ -7,10 +7,6 @@ var Spraycan = {
 
   view: null, //holds edit view for ACE events to access
 
-  theme_id: <%= Spraycan::Theme.active.first.id %>,
-
-  theme_name: '<%= Spraycan::Theme.active.first.name %>',
-
   editor: {minimised: false, maximised: false, visible: false },
 
   loaded: {},
