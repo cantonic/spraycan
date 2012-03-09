@@ -30,6 +30,18 @@ module Spraycan
       self.themes.map(&:guid)
     end
 
+    def palette
+      Palette.where(:guid => self.palette_guid).first
+    end
+
+    def background_image
+      Spraycan::File.where(:guid => self.preferences['background_file_guid']).first
+    end
+
+    def logo_image
+      Spraycan::File.where(:guid => self.preferences['logo_file_guid']).first
+    end
+
     def preferences
       self.preference_hash.present? ? JSON.parse(self.preference_hash) : {}
     end
