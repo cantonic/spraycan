@@ -14,10 +14,16 @@ Spraycan.Routers.Packs = Spraycan.Routers.Base.extend({
   switch_pack: function(cid) {
     var pack = Spraycan.packs.getByCid(cid);
 
+    //disable all other packs
     _.each(Spraycan.packs.models, function(p){
       if(p!=pack){
         p.set({active: false});
       }
+    });
+
+    //remove non-ar attributes:
+    _.each(['logo_url', 'background_url', 'background_color'], function(attr){
+      pack.unset(attr, {silent: true});
     });
 
     pack.save({active: true}, {

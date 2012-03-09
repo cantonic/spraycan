@@ -1,6 +1,6 @@
 collection @packs
 
-attributes :id, :name, :guid
+attributes :id, :name, :guid, :active
 
 node(:logo_url) { |pack| pack.logo_image.try(:url) }
 node(:background_url) { |pack| pack.background_image.try(:url) }
