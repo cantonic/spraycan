@@ -1,13 +1,13 @@
 <div class="tab" id="tab-themes" style="overflow-y: hidden; " tabindex="5001">
   <ul class="packs-list inline">
     <% _.each(packs, function(pack) { %>
-      <li class="<%= pack.get('active') ? 'active' : '' %>" id="pack-<%= pack.get('name').dasherize().toLowerCase() %>" style="background: <%= pack.get('background_color') %> url('<%= pack.get('background_url') %>') repeat right top;>
+      <li class="<%= pack.get('active') ? 'active' : '' %>" id="pack-<%= pack.get('name').dasherize().toLowerCase() %>" style="background: <%= pack.get('background_color') %> url('<%= pack.get('background_url') %>') repeat center;">
+        <div class="pack-logo" style="background: url(<%= pack.get('logo_url') %>) no-repeat center; background-size: 80px; width: 100px; height: 100px; position: absolute"></div>
         <span class="actions hidden">
           <a class="delete" href="#pack?delete=<%= pack.cid %>&confirm=<%= pack.id==undefined ? 'true' : 'true' %>"></a>
           <a class="edit" href="#pack/<%= pack.cid %>"></a>
         </span>
-        <a href="#pack?switch=<%= pack.cid %>" style="background-position: left center; background-repeat: no-repeat; background-size: 70% auto; background-image: url("/spraycan/retro_store_logo.png");">
-          <img src="<%= pack.get('logo_url') %>" width="100">
+        <a href="#pack?switch=<%= pack.cid %>">
           <span class="title"><%= pack.get('name') %></span>
         </a>
       </li>

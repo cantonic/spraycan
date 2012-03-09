@@ -352,6 +352,15 @@
             display: block;
           }
 
+          span.title {
+            display: block;
+            position: absolute;
+            bottom: 0;
+            padding: 5px;
+            @include background(rgba(35, 37, 40, 0.7));
+            width: 90px;
+          }
+
           span.actions {
             @include background(rgba(35, 37, 40, 0.7));
             position: absolute;
