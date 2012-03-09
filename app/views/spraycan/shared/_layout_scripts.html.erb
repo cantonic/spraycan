@@ -1,4 +1,6 @@
-<%= favicon_link_tag Spraycan::Asset.favicon.url %>
+<% if Spraycan::Asset.favicon.url.present? %>
+  <%= favicon_link_tag Spraycan::Asset.favicon.url %>
+<% end %>
 
 <%= javascript_include_tag "/spraycan/compiled/#{Spraycan::Config[:javascript_digest]}" %>
 <%= stylesheet_link_tag "/spraycan/compiled/#{Spraycan::Config[:stylesheet_digest]}", :id => 'compiled_stylesheets' %>
