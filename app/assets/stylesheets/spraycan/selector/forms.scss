@@ -267,9 +267,10 @@
     }
   }
 
-  form#new-palette-form {
+  form#new-palette-form, form#new-theme-form {
     input[type="button"] {      
       padding-left: 30px;
+      margin: 0 0 0 5px;
       @include background(url("/assets/spraycan/selector/toolbar/back-button-icon.png") no-repeat 5px 2px, linear-gradient(#0083bf, #005e9e));
 
       &:active, &.active {

@@ -1,7 +1,7 @@
 <div class="tab" id="tab-themes" style="overflow-y: hidden; " tabindex="5001">
   <ul class="packs-list inline">
     <% _.each(packs, function(pack) { %>
-      <li class="<%= pack.get('active') ? 'active' : '' %>" id="pack" style="width: 120px; text-align: center; padding-top: 30px; min-height: 50px;">
+      <li class="<%= pack.get('active') ? 'active' : '' %>" id="pack-<%= pack.get('name').dasherize().toLowerCase() %>">
         <span class="actions hidden">
           <a class="delete" href="#pack?delete=<%= pack.cid %>&confirm=<%= pack.id==undefined ? 'true' : 'true' %>"></a>
           <a class="edit" href="#pack/<%= pack.cid %>"></a>
@@ -12,6 +12,6 @@
       </li>
     <% }); %>
 
-    <li class="new-pack" style="width: 120px; text-align: center; padding-top: 30px; min-height: 50px;"><a href="#pack?new">Add new theme</a></li>
+    <li class="new-pack"><a href="#pack?new">Add new theme</a></li>
   </ul>
 </div>

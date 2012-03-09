@@ -10,7 +10,6 @@
 #spreeworks-editor {
   @include global-reset;
   font-family: "PT Sans Narrow", sans-serif;
-  // font-weight: bold;
   text-transform: uppercase;
   font-size: 13px;
   color: #d9dde1;
@@ -19,7 +18,7 @@
   bottom: 10px;
   left: 50%;
   margin-left: -213px;
-  min-width: 800px;
+  min-width: 620px;
 
   .clearfix {
     @include pie-clearfix;
@@ -163,6 +162,9 @@
           display: block;
         }
 
+        &.themes a {
+          background-image: url("/assets/spraycan/selector/toolbar/toolbar-themes.png");
+        }
         &.layouts a {
           background-image: url("/assets/spraycan/selector/toolbar/toolbar-layouts.png");
         }
@@ -239,17 +241,20 @@
     padding-bottom: 6px;
     margin-bottom: 45px;
 
-    &.active-layouts {
+    &.active-themes {
       background-position: 170px bottom;
     }
-    &.active-colors {
-      background-position: 260px bottom;
+    &.active-layouts {
+      background-position: 250px bottom;
     }
-    &.active-fonts {
+    &.active-colors {
       background-position: 345px bottom;
     }
-    &.active-images {
+    &.active-fonts {
       background-position: 430px bottom;
+    }
+    &.active-images {
+      background-position: 515px bottom;
     }
 
     .wrap {
@@ -320,24 +325,89 @@
       height: 190px;
       outline: none;
     }
-      
-    // .slimScrollRail {
-    //   @include border-radius(10px !important);
-    //   @include box-shadow(0 0 10px 0 #191c1d inset !important);
-    //   background-color: #2b2e31 !important;
-    //   width: 6px !important;
-    //   padding: 1px 2px !important;      
-    //   opacity: 1 !important;
-    // }
-    // .slimScrollBar {
-    //   @include border-radius(10px  !important);
-    //   @include background-image(linear-gradient(#ccd2d7, #7b7f82) !important);
-    //   border: 1px solid #babdbe !important;
-    //   opacity: 1 !important;
-    //   width: 4px !important;
-    //   right: 7px !important;
-    // }
-    
+
+    //--------------------------------------------------------
+    // Packs
+    //--------------------------------------------------------
+    &.active-themes {
+      ul.packs-list {
+        overflow: auto;
+        padding: 10px;
+
+        li {
+          width: 100px;
+          height: 100px;
+          text-align: center;
+          background-color: #232528;
+          margin: 10px;
+          cursor: pointer;
+          position: relative;
+
+          &.active {
+            @include box-shadow(0 0 10px 0 #191c1d inset);
+            background-color: #2b2e31;
+          }
+
+          &:hover span.actions {
+            display: block;
+          }
+
+          span.actions {
+            @include background(rgba(35, 37, 40, 0.7));
+            position: absolute;
+            right: 0px;
+            padding: 5px 2px;
+
+            a {
+              display: block;
+              float: right;
+              width: 13px;
+              height: 13px;
+              margin: 1px 5px;
+              background: url("/assets/spraycan/selector/toolbar/edit-delete-palette-icons.png") no-repeat;
+
+              &.edit {
+                background-position: left center;
+              }
+              &.delete {
+                background-position: -13px center;
+              }
+            }
+          }
+
+          &.new-pack a {
+            text-shadow: none;
+            background: url("/assets/spraycan/selector/toolbar/toolbar-add.png") no-repeat center top;
+            padding-top: 30px;
+            display: block;
+            width: 100px;
+            text-align: center; 
+            font-size: 11px;
+            margin-top: 25px;
+          }
+        }
+      }
+
+      #new-theme {
+        #section-source {
+          .section-body {
+            padding-top: 10px;
+          }
+        }
+
+        #section-theme-name {
+          width: 451px;
+
+          .text-field {
+            float: left;
+
+            input[type="text"] {
+              width: 369px;
+            }
+          }
+        }
+      }
+    }
 
     //--------------------------------------------------------
     // Layouts
@@ -528,7 +598,7 @@
             }
           }
         }
-      }      
+      }
     }
 
     //--------------------------------------------------------
@@ -611,7 +681,7 @@
 
             a {
               text-shadow: none;
-              background: url("/assets/spraycan/selector/toolbar/toolbar-add-palette.png") no-repeat center top;
+              background: url("/assets/spraycan/selector/toolbar/toolbar-add.png") no-repeat center top;
               padding-top: 30px;
               display: block;
               width: 100px;
