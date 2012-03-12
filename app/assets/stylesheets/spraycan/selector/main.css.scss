@@ -30,6 +30,10 @@
   .visible {
     display: block;
   }
+  .hidden-input {
+    position: absolute;
+    left: -9999px;
+  }
 
   .flash {
     padding: 10px;
