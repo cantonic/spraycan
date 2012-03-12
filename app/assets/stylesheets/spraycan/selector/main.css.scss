@@ -346,6 +346,8 @@
           &.active {
             @include box-shadow(0 0 10px 0 #191c1d inset);
             background-color: #2b2e31;
+            border: 10px solid transparent;
+            margin-top: 0;
           }
 
           &:hover span.actions {
@@ -366,6 +368,7 @@
             position: absolute;
             right: 0px;
             padding: 5px 2px;
+            z-index: 1;
 
             a {
               display: block;

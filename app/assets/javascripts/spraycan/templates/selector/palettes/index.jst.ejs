@@ -1,7 +1,7 @@
 <div class="tab" id="tab-colors" style="overflow-y: hidden; " tabindex="5001">
   <ul class="colors-palettes-list inline">
     <% _.each(palettes, function(palette) { %>
-      <li class="<%= palette.get('active') ? 'active' : '' %>" id="palette-<%= palette.get('name').dasherize().toLowerCase() %>">
+      <li class="<%= palette.get('active') ? 'active' : '' %> palette" id="palette-<%= palette.get('name').dasherize().toLowerCase() %>">
         <span class="actions hidden">
           <a class="delete" href="#palette?delete=<%= palette.cid %>&confirm=<%= palette.id==undefined ? 'true' : 'true' %>"></a>
           <a class="edit" href="#palette/<%= palette.cid %>"></a>

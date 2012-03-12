@@ -1,6 +1,6 @@
 Spraycan.Views.Packs.Index = Backbone.View.extend({
   events: {
-    "click li#pack a": "show_selected"
+    "click li.pack a": "show_selected"
   },
 
   initialize: function() {

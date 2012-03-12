@@ -1,6 +1,6 @@
 Spraycan.Views.Palettes.Index = Backbone.View.extend({
   events: {
-    "click li#palette-spree a": "show_selected"
+    "click li.palette a": "show_selected"
   },
 
   initialize: function() {

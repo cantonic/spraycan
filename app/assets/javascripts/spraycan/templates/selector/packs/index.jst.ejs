@@ -1,13 +1,13 @@
 <div class="tab" id="tab-themes" style="overflow-y: hidden; " tabindex="5001">
   <ul class="packs-list inline">
     <% _.each(packs, function(pack) { %>
-      <li class="<%= pack.get('active') ? 'active' : '' %>" id="pack-<%= pack.get('name').dasherize().toLowerCase() %>" style="background: <%= pack.get('background_color') %> url('<%= pack.get('background_url') %>') repeat center;">
-        <div class="pack-logo" style="background: url(<%= pack.get('logo_url') %>) no-repeat center; background-size: 80px; width: 100px; height: 100px; position: absolute"></div>
+      <li class="<%= pack.get('active') ? 'active' : '' %> pack" id="pack-<%= pack.get('name').dasherize().toLowerCase() %>" style="background: <%= pack.get('background_color') %> url('<%= pack.get('background_url') %>') repeat center;">
         <span class="actions hidden">
           <a class="delete" href="#pack?delete=<%= pack.cid %>&confirm=<%= pack.id==undefined ? 'true' : 'true' %>"></a>
           <a class="edit" href="#pack/<%= pack.cid %>"></a>
         </span>
         <a href="#pack?switch=<%= pack.cid %>">
+          <div class="pack-logo" style="background: url(<%= pack.get('logo_url') %>) no-repeat center; background-size: 80px; width: 100px; height: 100px; position: absolute"></div>
           <span class="title"><%= pack.get('name') %></span>
         </a>
       </li>

@@ -47,9 +47,10 @@ var Spraycan = {
 
     Backbone.history.start();
 
+    // Assign editor html block to a variable
     var editor = $("#spreeworks-editor");
 
-
+    // Set additional classes to editor for crossbrowser fixes
     if($.browser.webkit){
       editor.addClass('browser-webkit browser-version-'+$.browser.version);
     }
@@ -63,12 +64,14 @@ var Spraycan = {
       editor.addClass('browser-opera browser-version-'+$.browser.version); 
     }
 
+    // Bind hiding editor content to X icon on toolbar
     editor.find('.toolbar nav.actions li.show-hide span.icon').click(function(){    
       editor.find('.content').hide();
       editor.find('.toolbar nav.tabs li.active').removeClass('active');
       $(this).parent().hide();
     })
 
+    // Make editor draggable
     editor.draggable({
       handle: 'nav.actions li.drag span.icon',
       containment: 'window',
