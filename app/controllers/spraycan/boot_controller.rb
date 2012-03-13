@@ -20,6 +20,16 @@ module Spraycan
       end
     end
 
+    def mini
+      session[:full] = false
+      redirect_to '/spraycan#'
+    end
+
+    def full
+      session[:full] = true
+      redirect_to '/spraycan#'
+    end
+
     def toggle
       session[:full] = !session[:full]
       redirect_to '/spraycan#'

@@ -5,6 +5,7 @@ module Spree
   end
 end
 
+require 'spree_core'
 require Spree::Core::Engine.root.join "app/models/spree/preferences/preferable"
 require Spree::Core::Engine.root.join "app/models/spree/preferences/preferable_class_methods"
 require Spree::Core::Engine.root.join "app/models/spree/preferences/configuration"

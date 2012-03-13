@@ -29,7 +29,7 @@ module Spraycan
       if Rails.application.config.deface.enabled
         #ensure some basic required data is present:
         unless Spraycan::Palette.exists?
-          Spraycan::Palette.create(:active => true)
+          Spraycan::Palette.create(:active => true, :name => 'Default')
         end
 
         if Spraycan::Theme.exists?(:applies_to => 'base')

@@ -1,6 +1,8 @@
 Spraycan::Engine.routes.draw do
   root :to => 'boot#editor'
   match '/toggle', :to => 'boot#toggle'
+  match '/full', :to => 'boot#full'
+  match '/mini', :to => 'boot#mini'
   match '/state', :to => 'boot#state'
 
   match '/compiled/:digest.:action', :controller => :compiler

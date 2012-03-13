@@ -4,7 +4,7 @@ describe "Javascripts" do
   describe "managing", :js => true do
     before do
       @theme = Spraycan::Theme.create(:name => "Test Theme", :active => true)
-      @javascript = @theme.javascripts.create(:name => "first", :js => "alert('first');")
+      @javascript = @theme.javascripts.create(:name => "first", :js => "var x = 123;")
       load_theme(@theme)
     end
 
@@ -12,7 +12,7 @@ describe "Javascripts" do
       click_link 'JS'
       click_link 'Load Javascript'
 
-      page.should have_content("Test Theme » Javascript")
+      page.should have_content("Test Theme >> Javascript")
       find("tr[data-id='#{@javascript.id}']").should  have_link "Edit"
     end
 
@@ -24,7 +24,7 @@ describe "Javascripts" do
 
       click_link 'Close'
 
-      page.should have_content("Test Theme » Javascript")
+      page.should have_content("Test Theme >> Javascript")
 
       within("tr[data-id='#{name.gsub('new_', '')}']") do
         page.should have_link('Discard')
@@ -49,7 +49,7 @@ describe "Javascripts" do
 
       click_link 'Discard'
 
-      page.should have_content("Test Theme » Javascript")
+      page.should have_content("Test Theme >> Javascript")
 
       page.should_not have_link('Discard')
 
@@ -69,7 +69,7 @@ describe "Javascripts" do
 
       fill_in 'name', :with => 'second.js'
 
-      page.execute_script %q{Spraycan.view.code_editor.getSession().setValue('alert("second");');}
+      page.execute_script %q{Spraycan.view.code_editor.getSession().setValue('var y = 456;');}
       click_button "Save Changes"
 
       page.should have_link('Delete')

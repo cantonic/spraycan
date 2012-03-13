@@ -8,6 +8,6 @@ tmp
 nbproject
 *.swp
 spec/dummy/db/test.sqlite3
-spec/dummy/log
+spec/dummy/log/
 spec/dummy/app/theme_assets
 Gemfile.lock
