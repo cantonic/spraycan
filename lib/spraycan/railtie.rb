@@ -55,13 +55,26 @@ module Spraycan
       if Spraycan::Theme.table_exists?
         if Rails.cache.exist?('spraycan_all_view_overrides')
           #load from cache
-          Rails.application.config.deface.overrides.all = Rails.cache.read('spraycan_all_view_overrides')
+          Rails.cache.read('spraycan_all_view_overrides').each do |key|
+            Deface::Override.new Rails.cache.read(key)
+          end
         else
           #fetch from db and initiate
-          Spraycan::Theme.active.includes(:view_overrides).each { |theme| theme.view_overrides.map(&:initiate) }
+          all = []
 
-          #write all into cache
-          Rails.cache.write 'spraycan_all_view_overrides', Rails.application.config.deface.overrides.all
+          Spraycan::Theme.active.includes(:view_overrides).each do |theme|
+            #initiate each override and cache it's args
+            theme.view_overrides.inject(all) do |all, override|
+              override = override.initiate
+              key = "deface_override_#{override.digest}"
+              Rails.cache.write key, override.args
+              all << key
+            end
+          end
+
+          #cache list of current overrides
+          Rails.cache.write 'spraycan_all_view_overrides', all
+
         end
       end
 
