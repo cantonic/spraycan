@@ -133,7 +133,8 @@ var Spraycan = {
 
   refresh_toolbar: function(current){
     if(current!=undefined){
-      $('.toolbar nav.actions li.save').removeClass('enabled').addClass('disabled');
+      
+      Spraycan.disable_save;
 
       $("#spreeworks-editor .tabs .active").removeClass('active');
       $("#spreeworks-editor .tabs ." + current).addClass('active');
@@ -155,8 +156,12 @@ var Spraycan = {
     }
   },
 
-  show_save: function(){
+  enable_save: function(){
     $('.toolbar nav.actions li.save').removeClass('disabled').addClass('enabled');
+  },
+
+  disable_save: function(){
+    $('.toolbar nav.actions li.save').removeClass('enabled').addClass('disabled');
   },
 
   reload_frame: function(){

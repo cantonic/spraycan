@@ -41,7 +41,7 @@ Spraycan.Views.Palettes.Edit = Backbone.View.extend({
     var compiled = JST["spraycan/templates/selector/palettes/edit"];
     $(this.el).html(compiled(this.model.toJSON()));
 
-    Spraycan.show_save();
+    Spraycan.enable_save();
 
     $('#main').html(this.el);
 

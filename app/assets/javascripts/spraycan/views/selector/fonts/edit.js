@@ -15,7 +15,7 @@ Spraycan.Views.Fonts.Edit = Backbone.View.extend({
     $(this.el).html(compiled({display_name: this.display_name, themes: this.themes}));
     $('#main').html(this.el);
 
-    Spraycan.show_save();
+    Spraycan.enable_save();
 
     $("#spreeworks-editor .tabs .active").removeClass('active');
     $("#spreeworks-editor .tabs .fonts").addClass('active');
