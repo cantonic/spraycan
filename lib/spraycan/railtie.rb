@@ -40,16 +40,28 @@ module Spraycan
 
         Spraycan::Config.preferred_base_theme_id = theme.id
 
+        self.initiate_overrides
+      end
 
+    end
 
-        #clear all WIP overrides, they get reloaded below
-        Deface::Override.all.each do |virtual_path, overrides|
-          overrides.reject! {|name, override| override.args[:from_editor] }
-        end
+    def self.initiate_overrides
+      #clear all WIP overrides, they get reloaded below
+      Deface::Override.all.each do |virtual_path, overrides|
+        overrides.reject! {|name, override| override.args[:from_editor] }
+      end
 
-        #load all overrides from db
-        if Spraycan::Theme.table_exists?
+      #load all overrides from db 
+      if Spraycan::Theme.table_exists?
+        if Rails.cache.exist?('spraycan_all_view_overrides')
+          #load from cache
+          Rails.application.config.deface.overrides.all = Rails.cache.read('spraycan_all_view_overrides')
+        else
+          #fetch from db and initiate
           Spraycan::Theme.active.includes(:view_overrides).each { |theme| theme.view_overrides.map(&:initiate) }
+
+          #write all into cache
+          Rails.cache.write 'spraycan_all_view_overrides', Rails.application.config.deface.overrides.all
         end
       end
 
@@ -71,7 +83,7 @@ module Spraycan
       # and re-enabling the old initialize_themes method in 
       # spraycan/base_controller
       ActiveSupport.on_load(:action_controller) do
-        before_filter { Spraycan::Engine.initialize_themes }
+        before_filter { Spraycan::Engine.initiate_overrides }
       end
     end
 

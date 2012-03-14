@@ -1,5 +1,6 @@
 module Spraycan
   class PacksController < Spraycan::BaseController
+    after_filter :invalidate_cached_view_overrides, :only => [:create, :update, :destroy]
     respond_to :json
 
     def index

@@ -2,7 +2,7 @@ class Spraycan::ViewOverridesController < Spraycan::BaseController
   layout 'spraycan/editor'
 
   before_filter :set_theme, :only => [:index, :create]
-  # after_filter :initialize_themes, :only => [:create, :update, :destroy]
+  after_filter :invalidate_cached_view_overrides, :only => [:create, :update, :destroy]
 
   respond_to :json
 

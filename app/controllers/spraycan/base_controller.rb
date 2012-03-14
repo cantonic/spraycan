@@ -9,11 +9,7 @@ class Spraycan::BaseController < ActionController::Base
       # end
     end
 
-    # Not used right now as the railtie adds a global before_filter
-    # to handle loading themes before each request
-    # def initialize_themes
-    #   return unless Rails.env.production?
-    #   Spraycan::Engine.initialize_themes
-    #   # @_lookup_context.view_paths.map(&:clear_cache)
-    # end
+   def invalidate_cached_view_overrides
+     Rails.cache.delete 'spraycan_all_view_overrides'
+   end
 end
