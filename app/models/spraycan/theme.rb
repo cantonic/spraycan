@@ -23,8 +23,6 @@ module Spraycan
 
     acts_as_list
 
-    after_save :set_digest
-
     before_destroy { packs.clear }
 
     def export
@@ -106,15 +104,13 @@ module Spraycan
       def check_active
         if self.changed.include?('active') && self.active? && self.applies_to.present?
           Theme.where(:applies_to => self.applies_to).update_all(:active => false)
+
+          CompileDigest.update_stylesheet_digest()
         end
       end
 
       def set_guid
         self.guid ||= Guid.new.to_s
-      end
-
-      def set_digest
-        CompileDigest.update_stylesheet_digest()
       end
   end
 end

@@ -66,8 +66,6 @@ module Spraycan
             theme.active = true
             theme.save
           end
-
-          CompileDigest.update_stylesheet_digest()
         end
       end
 
