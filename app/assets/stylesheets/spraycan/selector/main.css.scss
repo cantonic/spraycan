@@ -207,6 +207,10 @@
       .save span.icon{
         background-image: url("/assets/spraycan/selector/toolbar/toolbar-save-active.png");
       }
+      .save.disabled span.icon{
+        background-image: url("/assets/spraycan/selector/toolbar/toolbar-save-disabled.png"); 
+        cursor: default;
+      }
       .save.error span.icon {
         background-image: url("/assets/spraycan/selector/toolbar/toolbar-save-error.png");        
       }
@@ -219,6 +223,11 @@
           @include box-shadow(0 0 10px 0 #191c1d inset);
           background-color: #2b2e31;
         }
+        &.disabled:active {
+          @include box-shadow(none);
+          background-color: transparent;
+        }
+
       }
     }
   }

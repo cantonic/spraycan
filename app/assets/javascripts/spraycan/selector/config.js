@@ -71,6 +71,11 @@ var Spraycan = {
       $(this).parent().hide();
     })
 
+    // Disable click on .disabled class
+    editor.find('.toolbar nav.actions li.disable span.icon').click(function(e){
+      e.preventDefault();
+    })
+
     // Make editor draggable
     editor.draggable({
       handle: 'nav.actions li.drag span.icon',
@@ -117,7 +122,7 @@ var Spraycan = {
 
   refresh_toolbar: function(current){
     if(current!=undefined){
-      $('.toolbar nav.actions li.save').removeClass('visible').addClass('hidden');
+      $('.toolbar nav.actions li.save').removeClass('enabled').addClass('disabled');
 
       $("#spreeworks-editor .tabs .active").removeClass('active');
       $("#spreeworks-editor .tabs ." + current).addClass('active');
@@ -140,7 +145,7 @@ var Spraycan = {
   },
 
   show_save: function(){
-    $('.toolbar nav.actions li.save').removeClass('hidden').addClass('visible');
+    $('.toolbar nav.actions li.save').removeClass('disabled').addClass('enabled');
   },
 
   reload_frame: function(){
