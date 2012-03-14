@@ -88,7 +88,7 @@
       float: left;
 
       li {
-        padding: 6px 0 !important;
+        padding: 4px 0 5px !important;
         float: none !important;
 
         a {
@@ -98,9 +98,9 @@
         &.ui-tabs-selected {
           // @include box-shadow(0 0 10px 0 #191c1d inset);
           background-color: #2b2e31;
-          background-position: left center;
+          background-position: left top;
           background-repeat: no-repeat;
-          background-image: url("/assets/spraycan/selector/toolbar/vertical-tabs-active.png")
+          background-image: url("/assets/spraycan/selector/toolbar/toolbar-sprite.png");
         }
       }
     }
@@ -161,25 +161,25 @@
 
         a {
           padding-left: 28px;
-          background-position: left;
           background-repeat: no-repeat;
+          background-image: url("/assets/spraycan/selector/toolbar/toolbar-sprite.png");
           display: block;
         }
 
         &.themes a {
-          background-image: url("/assets/spraycan/selector/toolbar/toolbar-themes.png");
+          background-position: left -31px;
         }
         &.layouts a {
-          background-image: url("/assets/spraycan/selector/toolbar/toolbar-layouts.png");
+          background-position: left -54px;
         }
         &.colors a {
-          background-image: url("/assets/spraycan/selector/toolbar/toolbar-colors.png");
+          background-position: left -74px;
         }
         &.fonts a {
-          background-image: url("/assets/spraycan/selector/toolbar/toolbar-fonts.png");
+          background-position: left -96px;
         }
         &.images a {
-          background-image: url("/assets/spraycan/selector/toolbar/toolbar-images.png");
+          background-position: left -116px;
         }
       }
     }
@@ -194,28 +194,32 @@
         display: block;
         width: 20px;
         height: 20px;
-        background-position: center;
         background-repeat: no-repeat;
+        background-image: url("/assets/spraycan/selector/toolbar/toolbar-sprite.png");
       }
 
       .drag span.icon{
-        background-image: url("/assets/spraycan/selector/toolbar/toolbar-drag.png");
+        background-position: left -156px;
       }
       .show-hide span.icon{
-        background-image: url("/assets/spraycan/selector/toolbar/toolbar-close.png");
+        background-position: -2px -134px;
       }
       .save span.icon{
-        background-image: url("/assets/spraycan/selector/toolbar/toolbar-save-active.png");
+        background-position: -45px -221px;
       }
       .save.disabled span.icon{
-        background-image: url("/assets/spraycan/selector/toolbar/toolbar-save-disabled.png"); 
+        background-position: -86px -221px;
         cursor: default;
       }
       .save.error span.icon {
-        background-image: url("/assets/spraycan/selector/toolbar/toolbar-save-error.png");        
+        background-position: -65px -221px;
       }
       .ajax-spinner span.icon {
         background-image: url("/assets/spraycan/selector/toolbar/ajax-loader.gif"); 
+      }
+      .ajax-spinner.disabled span.icon {
+        background-image: url("/assets/spraycan/selector/toolbar/toolbar-sprite.png");
+        background-position: -65px -223px;
       }
 
       .show-hide, .save {
@@ -389,13 +393,13 @@
               width: 13px;
               height: 13px;
               margin: 1px 5px;
-              background: url("/assets/spraycan/selector/toolbar/edit-delete-palette-icons.png") no-repeat;
+              background: url("/assets/spraycan/selector/toolbar/toolbar-sprite.png") no-repeat;
 
               &.edit {
-                background-position: left center;
+                background-position: -113px -225px;
               }
               &.delete {
-                background-position: -13px center;
+                background-position: -125px -225px;
               }
             }
           }
@@ -664,13 +668,13 @@
               width: 13px;
               height: 13px;
               margin: 1px 5px;
-              background: url("/assets/spraycan/selector/toolbar/edit-delete-palette-icons.png") no-repeat;
+              background: url("/assets/spraycan/selector/toolbar/toolbar-sprite.png") no-repeat;
 
               &.edit {
-                background-position: left center;
+                background-position: -113px -225px;
               }
               &.delete {
-                background-position: -13px center;
+                background-position: -125px -225px;
               }
             }
           }
@@ -938,30 +942,16 @@
                 width: 13px;
                 height: 13px;
                 margin: 1px 5px;
-                background: url("/assets/spraycan/selector/toolbar/edit-delete-palette-icons.png") no-repeat;
+                background: url("/assets/spraycan/selector/toolbar/toolbar-sprite.png") no-repeat;
 
                 &.edit {
-                  background-position: left center;
+                  background-position: -113px -225px;
                 }
                 &.delete {
-                  background-position: -13px center;
+                  background-position: -125px -225px;
                 }
               }
             }
-            // ul.actions {
-            //   position: absolute;
-            //   bottom: 0;
-            //   right: 0;
-            //   padding: 3px 5px;
-            //   @include background(none, rgba(68, 75, 78, 0.5));
-
-            //   li {                
-            //     a {
-            //       font-size: 0;
-            //       padding: 3px;
-            //     }
-            //   }
-            // }
           }
         }
       }
