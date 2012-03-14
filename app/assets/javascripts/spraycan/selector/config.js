@@ -117,6 +117,8 @@ var Spraycan = {
 
   refresh_toolbar: function(current){
     if(current!=undefined){
+      $('.toolbar nav.actions li.save').removeClass('visible').addClass('hidden');
+
       $("#spreeworks-editor .tabs .active").removeClass('active');
       $("#spreeworks-editor .tabs ." + current).addClass('active');
 
@@ -135,6 +137,10 @@ var Spraycan = {
 
       $('.toolbar nav.actions li.show-hide').show();
     }
+  },
+
+  show_save: function(){
+    $('.toolbar nav.actions li.save').removeClass('hidden').addClass('visible');
   },
 
   reload_frame: function(){

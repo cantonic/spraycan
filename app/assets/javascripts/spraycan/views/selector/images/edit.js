@@ -16,6 +16,8 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
 
     Spraycan.refresh_toolbar('images');
 
+    Spraycan.show_save();
+
     // enable edit / delete actions for images
     $(".chessboard").hover(function(){
       $(this).find('ul.actions').show();
