@@ -30,6 +30,17 @@ var Spraycan = {
   rollback: { preferences: {} },
 
   init: function() {
+    //ajax activity indicators
+    $(document).ajaxSend(function() {
+      Spraycan.busy.ajax = true;
+      Spraycan.busy_indicator();
+    });
+    $(document).ajaxStop(function() {
+      Spraycan.busy.ajax = false;
+      Spraycan.busy_indicator();
+    });
+
+
     Spraycan.themes = new Spraycan.Collections.Themes();
     Spraycan.palettes = new Spraycan.Collections.Palettes();
     Spraycan.packs = new Spraycan.Collections.Packs();
