@@ -22,17 +22,17 @@ module Spraycan
 
     def mini
       session[:full] = false
-      redirect_to '/spraycan#'
+      redirect
     end
 
     def full
       session[:full] = true
-      redirect_to '/spraycan#'
+      redirect
     end
 
     def toggle
       session[:full] = !session[:full]
-      redirect_to '/spraycan#'
+      redirect
     end
 
     def state
@@ -45,6 +45,10 @@ module Spraycan
     end
 
     private
+      def redirect
+        redirect_to "/spraycan#{ '?goto=' + params[:goto] if params.key?(:goto)}#"
+      end
+
       def load_objects
         @themes = Theme.all
         @palettes = Palette.all

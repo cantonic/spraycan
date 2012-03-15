@@ -8,7 +8,7 @@
 //= require spraycan/underscore-min
 //= require spraycan/backbone
 //= require spraycan/colorpicker
-//= require spraycan/jquery.googlefontpicker.js
+//= require spraycan/jquery.googlefontpicker
 //= require spraycan/models/theme
 //= require spraycan/models/file
 //= require spraycan/models/palette

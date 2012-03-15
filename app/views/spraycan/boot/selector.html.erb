@@ -46,6 +46,6 @@
       </div>
     </div>
 
-    <iframe src="/"></iframe>
+    <iframe src="<%= params.key?(:goto) ? params[:goto] : "/" %>"></iframe>
   </body>
 </html>

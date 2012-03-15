@@ -84,6 +84,12 @@ $jQ(function() {
 
     $jQ('*').bind('mouseenter', find_hook_frame);
     show_hook_frames();
+  }else{
+
+    $jQ(document).bind('keypress.meta_e', function(){
+      window.location.href="/spraycan?goto=" + escape(window.location.href);
+    });
+
   }
 });
 
