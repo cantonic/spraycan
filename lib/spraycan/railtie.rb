@@ -56,7 +56,8 @@ module Spraycan
         if Rails.cache.exist?('spraycan_all_view_overrides')
           #load from cache
           Rails.cache.read('spraycan_all_view_overrides').each do |key|
-            Deface::Override.new Rails.cache.read(key)
+            #dup needed to unfreeze hash
+            Deface::Override.new Rails.cache.read(key).dup
           end
         else
           #fetch from db and initiate
