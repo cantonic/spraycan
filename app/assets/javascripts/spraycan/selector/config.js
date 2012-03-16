@@ -29,6 +29,8 @@ var Spraycan = {
 
   rollback: { preferences: {} },
 
+  changes: {},
+
   init: function() {
     //ajax activity indicators
     $(document).ajaxSend(function() {
@@ -121,9 +123,6 @@ var Spraycan = {
     Spraycan.current_collections = { themes: []};
 
     Spraycan.new_collections = { themes: [] };
-
-    //recreates collections
-    // new Spraycan.Routers.Files();
   },
 
   set_current: function(group, action, model){
@@ -133,8 +132,7 @@ var Spraycan = {
 
   refresh_toolbar: function(current){
     if(current!=undefined){
-      
-      Spraycan.disable_save;
+      Spraycan.disable_save();
 
       $("#spreeworks-editor .tabs .active").removeClass('active');
       $("#spreeworks-editor .tabs ." + current).addClass('active');
@@ -202,6 +200,34 @@ var Spraycan = {
     }else{
       $('.toolbar nav.actions li.ajax-spinner').hide();
     }
+  },
+
+  set_initial_value: function(view, field, value){
+    if(Spraycan.changes[view]==undefined){
+      Spraycan.changes[view] = {}
+    }
+
+    Spraycan.changes[view][field] = { initial: value, current: value };
+  },
+
+  track_change: function(view, field, value){
+    Spraycan.changes[view][field]['current'] = value;
+
+    if(Spraycan.has_changes(view)){ 
+      Spraycan.enable_save();
+    }else{
+      Spraycan.disable_save();
+    }
+  },
+
+  has_changes: function(view){
+    return _.any(Spraycan.changes[view], function(field){
+      if(field['current']==undefined){
+        return false
+      }else{
+        return field['current']!=field['initial'] 
+      }
+    });
   },
 
   preload_fonts: function(){

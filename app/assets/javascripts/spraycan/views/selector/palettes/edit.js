@@ -14,6 +14,21 @@ Spraycan.Views.Palettes.Edit = Backbone.View.extend({
     this.render();
   },
 
+  setup_dirty_tracking: function(pallete){
+    Spraycan.set_initial_value('palettes-' + pallete.cid, 'name', pallete.get('name'));
+
+    Spraycan.set_initial_value('palettes-' + pallete.cid, 'preferred_layout_background_color', pallete.get('preferred_layout_background_color'));
+    Spraycan.set_initial_value('palettes-' + pallete.cid, 'preferred_product_background_color', pallete.get('preferred_product_background_color'));
+
+    Spraycan.set_initial_value('palettes-' + pallete.cid, 'preferred_title_text_color', pallete.get('preferred_title_text_color'));
+    Spraycan.set_initial_value('palettes-' + pallete.cid, 'preferred_body_text_color', pallete.get('preferred_body_text_color'));
+    Spraycan.set_initial_value('palettes-' + pallete.cid, 'preferred_link_text_color', pallete.get('preferred_link_text_color'));
+
+    Spraycan.set_initial_value('palettes-' + pallete.cid, 'preferred_product_title_text_color', pallete.get('preferred_product_title_text_color'));
+    Spraycan.set_initial_value('palettes-' + pallete.cid, 'preferred_product_body_text_color', pallete.get('preferred_product_body_text_color'));
+    Spraycan.set_initial_value('palettes-' + pallete.cid, 'preferred_product_link_text_color', pallete.get('preferred_product_link_text_color'));
+  },
+
   save: function(event) {
     if(event!=undefined){
       event.preventDefault();
@@ -26,6 +41,8 @@ Spraycan.Views.Palettes.Edit = Backbone.View.extend({
     this.model.save(attrs, {
       success: function(model, resp) {
         Spraycan.reload_styles();
+        Spraycan.view.setup_dirty_tracking(model);
+        Spraycan.disable_save();
       },
       error: Spraycan.handle_save_error
     });
@@ -41,9 +58,13 @@ Spraycan.Views.Palettes.Edit = Backbone.View.extend({
     var compiled = JST["spraycan/templates/selector/palettes/edit"];
     $(this.el).html(compiled(this.model.toJSON()));
 
-    Spraycan.enable_save();
+    this.setup_dirty_tracking(this.model);
 
     $('#main').html(this.el);
+
+    $('#new-palette-form #name').keyup(function(evt){
+      Spraycan.track_change('palettes-' + Spraycan.view.model.cid, 'name', $(evt.currentTarget).val());
+    });
 
     $('#new-palette .picker').ColorPicker({
       onBeforeShow: function (x,y,z,f) {
@@ -56,7 +77,10 @@ Spraycan.Views.Palettes.Edit = Backbone.View.extend({
 	    },
       onChange: function (hsb, hex, rgb) {
         Spraycan.view.current_color_picker.find('.sample').css('backgroundColor', '#' + hex);
-        Spraycan.view.current_color_picker.find('input').val('#' + hex);
+        var input = Spraycan.view.current_color_picker.find('input')
+        input.val('#' + hex);
+
+        Spraycan.track_change('palettes-' + Spraycan.view.model.cid, input.attr('name'), '#' + hex);
     	} });
 
     return this;

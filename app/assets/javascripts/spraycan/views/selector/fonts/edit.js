@@ -9,13 +9,40 @@ Spraycan.Views.Fonts.Edit = Backbone.View.extend({
     this.render();
   },
 
+  setup_dirty_tracking: function(){
+    Spraycan.set_initial_value('fonts', 'preferred_title_font', Spraycan.preferences.title_font);
+    Spraycan.set_initial_value('fonts', 'preferred_body_font', Spraycan.preferences.body_font);
+    Spraycan.set_initial_value('fonts', 'preferred_base_font_size', Spraycan.preferences.base_font_size);
+
+    Spraycan.set_initial_value('fonts', 'preferred_header_navigation_font_size', Spraycan.preferences.header_navigation_font_size);
+    Spraycan.set_initial_value('fonts', 'preferred_horizontal_navigation_font_size', Spraycan.preferences.horizontal_navigation_font_size);
+    Spraycan.set_initial_value('fonts', 'preferred_main_navigation_header_font_size', Spraycan.preferences.main_navigation_header_font_size);
+    Spraycan.set_initial_value('fonts', 'preferred_main_navigation_font_size', Spraycan.preferences.main_navigation_font_size);
+
+    Spraycan.set_initial_value('fonts', 'preferred_product_list_name_font_size', Spraycan.preferences.product_list_name_font_size);
+    Spraycan.set_initial_value('fonts', 'preferred_product_list_price_font_size', Spraycan.preferences.product_list_price_font_size);
+    Spraycan.set_initial_value('fonts', 'preferred_product_list_header_font_size', Spraycan.preferences.product_list_header_font_size);
+    Spraycan.set_initial_value('fonts', 'preferred_product_list_search_font_size', Spraycan.preferences.product_list_search_font_size);
+
+    Spraycan.set_initial_value('fonts', 'preferred_product_detail_name_font_size', Spraycan.preferences.product_detail_name_font_size);
+    Spraycan.set_initial_value('fonts', 'preferred_product_detail_description_font_size', Spraycan.preferences.product_detail_description_font_size);
+    Spraycan.set_initial_value('fonts', 'preferred_product_detail_price_font_size', Spraycan.preferences.product_detail_price_font_size);
+    Spraycan.set_initial_value('fonts', 'preferred_product_detail_title_font_size', Spraycan.preferences.product_detail_title_font_size);
+
+    Spraycan.set_initial_value('fonts', 'preferred_heading_font_size', Spraycan.preferences.heading_font_size);
+    Spraycan.set_initial_value('fonts', 'preferred_sub_heading_font_size', Spraycan.preferences.sub_heading_font_size);
+    Spraycan.set_initial_value('fonts', 'preferred_button_font_size', Spraycan.preferences.button_font_size);
+    Spraycan.set_initial_value('fonts', 'preferred_input_box_font_size', Spraycan.preferences.input_box_font_size);
+  },
+
   render: function() {
     var compiled = JST["spraycan/templates/selector/fonts/edit"];
 
     $(this.el).html(compiled({display_name: this.display_name, themes: this.themes}));
     $('#main').html(this.el);
 
-    Spraycan.enable_save();
+    this.setup_dirty_tracking();
+
 
     $("#spreeworks-editor .tabs .active").removeClass('active');
     $("#spreeworks-editor .tabs .fonts").addClass('active');
@@ -36,14 +63,20 @@ Spraycan.Views.Fonts.Edit = Backbone.View.extend({
     $('#title_font').googleFontPicker({
       defaultFont: Spraycan.preferences.title_font,
       callbackFunc: function(fontFamily){
-        $("input#preferred_title_font").val(fontFamily.split(',')[0]);
+        var val = fontFamily.split(',')[0];
+        $("input#preferred_title_font").val(val);
+
+        Spraycan.track_change('fonts', 'preferred_title_font', val);
       }
     });
 
     $('#body_font').googleFontPicker({
       defaultFont: Spraycan.preferences.body_font,
       callbackFunc: function(fontFamily){
-        $("input#preferred_body_font").val(fontFamily.split(',')[0]);
+        var val = fontFamily.split(',')[0];
+        $("input#preferred_body_font").val(val);
+
+        Spraycan.track_change('fonts', 'preferred_body_font', val);
       }
     });
 
@@ -57,11 +90,14 @@ Spraycan.Views.Fonts.Edit = Backbone.View.extend({
         min: 1,
         max: 30,
         slide: function(event, ui) {
+          Spraycan.track_change('fonts', size_el.attr('id'), ui.value);
+
           size_el.val(ui.value)
         }
       });
 
       size_el.keyup(function(){
+
         slider.slider("value", parseInt(size_el.attr('value')));
       });
     });

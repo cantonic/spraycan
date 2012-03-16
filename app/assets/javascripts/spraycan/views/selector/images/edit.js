@@ -8,15 +8,27 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
     this.render();
   },
 
+  setup_dirty_tracking: function(){
+    Spraycan.set_initial_value('images', 'favicon_file_guid', Spraycan.preferences.favicon_file_guid);
+    Spraycan.set_initial_value('images', 'logo_file_guid', Spraycan.preferences.logo_file_guid);
+    Spraycan.set_initial_value('images', 'background_file_guid', Spraycan.preferences.background_file_guid);
+
+    Spraycan.set_initial_value('images', 'logo_alignment', Spraycan.preferences.logo_alignment);
+
+    Spraycan.set_initial_value('images', 'background_repeat', Spraycan.preferences.background_repeat);
+    Spraycan.set_initial_value('images', 'background_alignment', Spraycan.preferences.background_alignment);
+
+  },
+
   render: function() {
     var compiled = JST["spraycan/templates/selector/images/edit"];
+
+    this.setup_dirty_tracking();
 
     $(this.el).html(compiled());
     $('#main').html(this.el);
 
     Spraycan.refresh_toolbar('images');
-
-    Spraycan.enable_save();
 
     // enable edit / delete actions for images
     $(".chessboard").hover(function(){
@@ -62,21 +74,21 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
 
     // handle actual favicon upload
     $('#favicon_file').change(function() {
-
       $('#section-images-favicon .ready').removeClass('visible').addClass('hidden');
+      $('#section-images-favicon .edit').removeClass('visible').addClass('hidden');
       $('#section-images-favicon .uploading').removeClass('hidden').addClass('visible');
 
-      $(this).upload('/spraycan/themes/' + Spraycan.theme_id + '/files.json', { 'preference': 'favicon_file_guid' }, function(res) {
+      $(this).upload('/spraycan/themes/' + Spraycan.theme_id + '/files.json', {}, function(res) {
         $('#section-images-favicon .uploading').removeClass('visible').addClass('hidden')
 
         if(res.id!="false"){
-          Spraycan.rollback.preferences.favicon_file_guid = Spraycan.preferences.favicon_file_guid;
-          Spraycan.preferences.favicon_file_guid = res.guid;
-          Spraycan.rollback.preferences.favicon_file_url = Spraycan.preferences.favicon_file_url;
-          Spraycan.preferences.favicon_file_url = res.url;
+          $('#favicon_file_guid').val(res.guid);
+          $('#favicon_file_url').val(res.url);
+
+          Spraycan.track_change('images', 'favicon_file_guid', res.guid);
 
           $('#section-images-favicon .edit').removeClass('hidden').addClass('visible');
-          $('#section-images-favicon .images-upload-background').css('background-image', 'url(' + Spraycan.preferences.favicon_file_url + ')');
+          $('#section-images-favicon .images-upload-background').css('background-image', 'url(' + res.url + '?' + Date.now() + ')');
         }
       }, 'json');
     });
@@ -123,22 +135,20 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
     // handle actual logo upload
     $('#logo_file').change(function() {
       $('#section-images-logo .ready').removeClass('visible').addClass('hidden');
+      $('#section-images-logo .edit').removeClass('visible').addClass('hidden');
       $('#section-images-logo .uploading').removeClass('hidden').addClass('visible');
 
-      $(this).upload('/spraycan/themes/' + Spraycan.theme_id + '/files.js', { 'preference': 'logo_file_guid' }, function(res) {
-        $('#section-images-logo .uploading').removeClass('visible').addClass('hidden')
-
+      $(this).upload('/spraycan/themes/' + Spraycan.theme_id + '/files.js', { }, function(res) {
+        $('#section-images-logo .uploading').removeClass('visible').addClass('hidden');
 
         if(res.id!="false"){
-          Spraycan.reload_styles();
+          $('#logo_file_guid').val(res.guid);
+          $('#logo_file_url').val(res.url);
 
-          Spraycan.rollback.preferences.logo_file_guid = Spraycan.preferences.logo_file_guid;
-          Spraycan.preferences.logo_file_guid = res.guid;
-          Spraycan.rollback.preferences.logo_file_url = Spraycan.preferences.logo_file_url;
-          Spraycan.preferences.logo_file_url = res.url;
+          Spraycan.track_change('images', 'logo_file_guid', res.guid);
 
           $('#section-images-logo .edit').removeClass('hidden').addClass('visible');
-          $('#section-images-logo .images-upload-background').css('background-image', 'url(' + Spraycan.preferences.logo_file_url + ')');
+          $('#section-images-logo .images-upload-background').css('background-image', 'url(' + res.url + '?' + Date.now() + ')');
         }
       }, 'json');
     });
@@ -168,24 +178,9 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
             backgroundPosition: logo_align
           });
 
-          //submit perference to server
-          prefs = new Spraycan.Collections.Preferences();
-          prefs.add({
-            configuration: "Spraycan::Config",
-            name: "logo_alignment",
-            value: logo_align
-          });
+          $('#logo_alignment').val(logo_align);
 
-          Backbone.sync('create', prefs, {
-            success: function(model, resp) {
-              Spraycan.reload_styles();
-              Spraycan.rollback.preferences.logo_alignment = Spraycan.preferences.logo_alignment;
-              Spraycan.preferences.logo_alignment = logo_align;
-            },
-            error: Spraycan.handle_save_error
-          });
-
-
+          Spraycan.track_change('images', 'logo_alignment', logo_align);
         }
       })
     });
@@ -205,11 +200,7 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
 
       //submit perference to server
       prefs = new Spraycan.Collections.Preferences();
-      prefs.add({
-        configuration: "Spraycan::Config",
-        name: "background_file_guid",
-        value: 0
-      });
+
 
       Backbone.sync('create', prefs, {
         success: function(model, resp) {
@@ -230,19 +221,17 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
       $('#section-images-background .ready').removeClass('visible').addClass('hidden');
       $('#section-images-background .uploading').removeClass('hidden').addClass('visible');
 
-      $(this).upload('/spraycan/themes/' + Spraycan.theme_id + '/files.js', { 'preference': 'background_file_guid' }, function(res) {
+      $(this).upload('/spraycan/themes/' + Spraycan.theme_id + '/files.js', { }, function(res) {
         $('#section-images-background .uploading').removeClass('visible').addClass('hidden')
 
         if(res.id!="false"){
-          Spraycan.reload_styles();
+          $('#background_file_guid').val(res.guid);
+          $('#background_file_url').val(res.url);
 
-          Spraycan.rollback.preferences.background_file_guid = Spraycan.preferences.background_file_guid;
-          Spraycan.preferences.background_file_guid = res.guid;
-          Spraycan.rollback.preferences.background_file_url = Spraycan.preferences.background_file_url;
-          Spraycan.preferences.background_file_url = res.url;
+          Spraycan.track_change('images', 'background_file_guid', res.guid);
 
           $('#section-images-background .edit').removeClass('hidden').addClass('visible');
-          $('#section-images-background .images-upload-background').css('background-image', 'url(' + Spraycan.preferences.background_file_url + ')');
+          $('#section-images-background .images-upload-background').css('background-image', 'url(' + res.url + '?' + Date.now() + ')');
         }
       }, 'json');
     });
@@ -271,23 +260,9 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
             backgroundRepeat: bg_repeat
           });
 
-          //submit perference to server
-          prefs = new Spraycan.Collections.Preferences();
-          prefs.add({
-            configuration: "Spraycan::Config",
-            name: "background_repeat",
-            value: bg_repeat
-          });
+          $('#background_repeat').val(bg_repeat);
 
-          Backbone.sync('create', prefs, {
-            success: function(model, resp) {
-              Spraycan.reload_styles();
-              Spraycan.rollback.preferences.logo_alignment = Spraycan.preferences.background_repeat;
-              Spraycan.preferences.background_repeat = bg_repeat;
-            },
-            error: Spraycan.handle_save_error
-          });
-
+          Spraycan.track_change('images', 'background_repeat', bg_repeat);
         }
       })
     });
@@ -308,22 +283,9 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
             backgroundPosition: bg_align
           });
 
-          //submit perference to server
-          prefs = new Spraycan.Collections.Preferences();
-          prefs.add({
-            configuration: "Spraycan::Config",
-            name: "background_alignment",
-            value: bg_align
-          });
+          $('#background_alignment').val(bg_align);
 
-          Backbone.sync('create', prefs, {
-            success: function(model, resp) {
-              Spraycan.reload_styles();
-              Spraycan.rollback.preferences.logo_alignment = Spraycan.preferences.background_alignment;
-              Spraycan.preferences.background_alignment = bg_align;
-            },
-            error: Spraycan.handle_save_error
-          });
+          Spraycan.track_change('images', 'background_alignment', bg_align);
         }
       })
     });
@@ -337,21 +299,60 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
     }
     // Spraycan.clear_errors();
 
-    attrs = $('form#images_form').serializeObject();
-
     prefs = new Spraycan.Collections.Preferences();
-
-    _.each(attrs, function(value, key){
-      prefs.add({
-        configuration: "Spraycan::Config",
-        name: key,
-        value: value
-      });
+    prefs.add({
+      configuration: "Spraycan::Config",
+      name: "favicon_file_guid",
+      value: $('#favicon_file_guid').val()
+    });
+    prefs.add({
+      configuration: "Spraycan::Config",
+      name: "logo_file_guid",
+      value: $('#logo_file_guid').val()
+    });
+    prefs.add({
+      configuration: "Spraycan::Config",
+      name: "background_file_guid",
+      value: $('#background_file_guid').val()
+    });
+    prefs.add({
+      configuration: "Spraycan::Config",
+      name: "logo_alignment",
+      value: $('#logo_alignment').val()
+    });
+    prefs.add({
+      configuration: "Spraycan::Config",
+      name: "background_repeat",
+      value: $('#background_repeat').val()
+    });
+    prefs.add({
+      configuration: "Spraycan::Config",
+      name: "background_alignment",
+      value: $('#background_alignment').val()
     });
 
     Backbone.sync('create', prefs, {
       success: function(model, resp) {
         Spraycan.reload_frame();
+        Spraycan.disable_save();
+
+        //set local preferences
+        Spraycan.preferences.favicon_file_guid = $('#favicon_file_guid').val();
+        Spraycan.preferences.favicon_file_url = $('#favicon_file_url').val();
+
+        Spraycan.preferences.logo_file_guid = $('#logo_file_guid').val();
+        Spraycan.preferences.logo_file_url = $('#logo_file_url').val();
+
+        Spraycan.preferences.background_file_guid = $('#background_file_guid').val();
+        Spraycan.preferences.background_file_url = $('#background_file_url').val();
+
+        Spraycan.preferences.logo_alignment = $('#logo_alignment').val();
+
+        Spraycan.preferences.background_repeat = $('#background_repeat').val();
+        Spraycan.preferences.background_alignment = $('#background_alignment').val();
+
+
+        Spraycan.view.setup_dirty_tracking();
       },
       error: Spraycan.handle_save_error
     });
