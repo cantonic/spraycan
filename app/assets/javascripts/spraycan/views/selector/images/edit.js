@@ -64,9 +64,7 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
       Backbone.sync('create', prefs, {
         success: function(model, resp) {
           Spraycan.reload_styles();
-          Spraycan.rollback.preferences.favicon_file_guid = Spraycan.preferences.favicon_file_guid;
           Spraycan.preferences.favicon_file_guid = 0;
-          Spraycan.rollback.preferences.favicon_file_url = Spraycan.preferences.favicon_file_url;
           Spraycan.preferences.favicon_file_url = "";       },
         error: Spraycan.handle_save_error
       });
@@ -124,9 +122,7 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
       Backbone.sync('create', prefs, {
         success: function(model, resp) {
           Spraycan.reload_styles();
-          Spraycan.rollback.preferences.logo_file_guid = Spraycan.preferences.logo_file_guid;
           Spraycan.preferences.logo_file_guid = 0;
-          Spraycan.rollback.preferences.logo_file_url = Spraycan.preferences.logo_file_url;
           Spraycan.preferences.logo_file_url = "";       },
         error: Spraycan.handle_save_error
       });
@@ -205,10 +201,7 @@ Spraycan.Views.Images.Edit = Backbone.View.extend({
       Backbone.sync('create', prefs, {
         success: function(model, resp) {
           Spraycan.reload_styles();
-          Spraycan.rollback.preferences.background_file_guid = Spraycan.preferences.background_file_guid;
           Spraycan.preferences.background_file_guid = 0;
-
-          Spraycan.rollback.preferences.background_file_url = Spraycan.preferences.background_file_url;
           Spraycan.preferences.background_file_url = "";
         },
         error: Spraycan.handle_save_error

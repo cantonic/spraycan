@@ -27,8 +27,6 @@ var Spraycan = {
 
   preferences: { },
 
-  rollback: { preferences: {} },
-
   changes: {},
 
   init: function() {
