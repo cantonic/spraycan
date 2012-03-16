@@ -86,7 +86,7 @@ $jQ(function() {
     show_hook_frames();
   }else{
 
-    $jQ(document).bind('keypress.meta_e', function(){
+    $jQ(document).bind('keypress.e', function(){
       window.location.href="/spraycan?goto=" + escape(window.location.href);
     });
 
