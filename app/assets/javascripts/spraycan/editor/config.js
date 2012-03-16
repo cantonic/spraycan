@@ -20,6 +20,7 @@ var Spraycan = {
   new_collections: {},
 
   init: function() {
+
     new Spraycan.Routers.Common();
     new Spraycan.Routers.Inspector();
     new Spraycan.Routers.Themes();
