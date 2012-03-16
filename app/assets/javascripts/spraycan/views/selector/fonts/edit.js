@@ -1,4 +1,6 @@
 Spraycan.Views.Fonts.Edit = Backbone.View.extend({
+  current_attrs: null,
+
   events: {
     "submit form": "save"
   },
@@ -42,7 +44,6 @@ Spraycan.Views.Fonts.Edit = Backbone.View.extend({
     $('#main').html(this.el);
 
     this.setup_dirty_tracking();
-
 
     $("#spreeworks-editor .tabs .active").removeClass('active');
     $("#spreeworks-editor .tabs .fonts").addClass('active');
@@ -111,11 +112,11 @@ Spraycan.Views.Fonts.Edit = Backbone.View.extend({
     }
     // Spraycan.clear_errors();
 
-    attrs = $('form#fonts_form').serializeObject();
+    this.current_attrs = $('form#fonts_form').serializeObject();
 
     prefs = new Spraycan.Collections.Preferences();
 
-    _.each(attrs, function(value, key){
+    _.each(this.current_attrs, function(value, key){
       prefs.add({
         configuration: "Spraycan::Config",
         name: key,
@@ -126,11 +127,17 @@ Spraycan.Views.Fonts.Edit = Backbone.View.extend({
     Backbone.sync('create', prefs, {
       success: function(model, resp) {
         Spraycan.reload_styles();
+
+        _.each(Spraycan.view.current_attrs, function(value, attr){
+          Spraycan.preferences[attr] = value;
+        });
+        Spraycan.view.setup_dirty_tracking();
+        Spraycan.disable_save();
+
       },
       error: Spraycan.handle_save_error
     });
 
- 
     return false;
 
    }
