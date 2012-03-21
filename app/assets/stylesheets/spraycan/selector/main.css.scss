@@ -121,7 +121,7 @@
 
   a {
     text-decoration: none;
-    color: #d9dde1;
+    color: white;
   }
 
   nav {
@@ -311,7 +311,9 @@
             text-align: center;
             @include box-shadow(0 0 10px 0 #383e40 inset);
             padding: 5px 10px;
-            background-color: #464c4f; 
+            background-color: #464c4f;
+            font-size: 14px;
+            color: white;
           }
         }
 
@@ -457,7 +459,11 @@
           margin-top: -6px;
           padding-top: 6px;
           height: 190px;
-        }        
+
+          a {
+            font-size: 13px;
+          }
+        }
       }
 
       .sublayouts-section-header {
@@ -569,6 +575,7 @@
               vertical-align: middle;
               z-index: 1;
               position: relative;
+              font-size: 14px;
             }
 
             span.icon {
@@ -804,7 +811,7 @@
             text-align: center;
             @include box-shadow(0 0 10px 0 #383e40 inset);
             padding: 5px 10px;
-            background-color: #464c4f; 
+            background-color: #464c4f;
           }
         }
 
