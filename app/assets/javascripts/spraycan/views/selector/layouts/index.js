@@ -15,7 +15,7 @@ Spraycan.Views.Layouts.Index = Backbone.View.extend({
     $(this.el).html(compiled());
     $('#main').html(this.el);
 
-    $("#tab-layouts").tabs();
+    $(".vertical-tabs").tabs();
 
     Spraycan.refresh_toolbar('layouts');
 

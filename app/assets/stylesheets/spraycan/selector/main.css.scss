@@ -442,28 +442,93 @@
     // Layouts
     //--------------------------------------------------------
     &.active-layouts {
-      width: 640px;
+      width: 712px;
       overflow: hidden;
 
       .tab{
         overflow: hidden;
-        padding-top: 10px;
-        padding-bottom: 10px;
       }
 
       .vertical-tabs {
         text-align: right;        
 
         .tab-links {
-          width: 150px;
+          width: 118px;
+          margin-top: -6px;
+          padding-top: 6px;
+          height: 190px;
         }        
       }
+
+      .sublayouts-section-header {
+        position: absolute;
+        width: 590px;
+        left: 120px;
+      }
+      .layouts-section-header {
+        width: 119px;
+        position: absolute !important;
+        border-right: 1px solid #2A2E30;
+      }
+
+      .sublayout-tab {
+        margin-left: 119px;
+        overflow: auto;
+        width: 587px;
+
+        .section-body {
+          overflow: auto;
+          margin-top: -6px;
+        }
+
+        .tab-links {
+          width: 118px;
+          padding-top: 5px;
+          text-align: left;
+          border-right: none !important;
+        }
+      }
+
+      .layouts-list ul.tab-links{
+        border-right: 1px solid #2A2E30;
+      }
+
+      .section {
+        
+        &#section-layouts-subsection {
+          width: 596px;
+        }
+
+        .section-body {
+          padding: 5px 0;
+
+          .layouts-list {
+            &.sublayouts {
+              text-align: left;
+              overflow: auto;
+
+              .tab-links {
+                li {
+                  padding-top: 5px !important;
+
+                  &.ui-tabs-selected {
+                    background-image: none;
+                  }
+                  a {
+                    text-transform: none;
+                  }
+                }
+              }
+            }
+          }
+        }
+      } 
 
       .tabs-content {
         text-align: center;
         padding: 0 5px;
-        width: 465px;    
-        height: 140px;
+        width: 453px;
+        height: 179px;
         overflow: hidden;        
 
         .ui-tabs-panel {
@@ -474,6 +539,11 @@
             width: 460px !important;
           }
         }
+        .ui-widget-content {
+          li {
+            padding: 0 !important;
+          }
+        }
 
         ul {
           li {
@@ -482,147 +552,42 @@
             max-width: 100px;
             cursor: pointer;
             width: 100px;
+            border: 1px solid #464a4c;
+
+            a {
+              display: table;
+              width: 98px;
+              vertical-align: middle;
+              text-align: center;
+              height: 65px;
+              border-right: 1px solid #242629;
+              border-bottom: 1px solid #242629;
+            }
+
+            span.title {
+              display: table-cell;
+              vertical-align: middle;
+              z-index: 1;
+              position: relative;
+            }
 
             span.icon {
-              width: 66px;
-              height: 64px;
               display: block;
-              margin: 10px auto;              
-              background-repeat: no-repeat;
-              background-image: url("/assets/spraycan/selector/toolbar/layouts-icons.png");
+              text-align: center;
+              font-size: 60px;
+              line-height: 70px;
+              color: #4A5359;
+              position: absolute;
+              width: 100px;
+              z-index: 0;
             }
 
             &.active {
               @include box-shadow(0 0 10px 0 #191c1d inset);
               background-color: #2b2e31;
-            }
 
-            &.layout-store-default{ 
-              span.icon{
-                background-position: left top;
-              }
-              &.active span.icon{
-                background-position: left -64px;                
-              }
-            }
-            &.layout-store-right-sidebar {
               span.icon {
-                background-position: -66px top;
-              }
-              &.active span.icon{
-                background-position: -66px -64px;                
-              }
-            }
-            &.layout-store-split {
-              span.icon {
-                background-position: -198px top;
-              }
-              &.active span.icon{
-                background-position: -198px -64px;                
-              }
-            }
-            &.layout-store-no-sidebar {
-              span.icon {
-                background-position: -132px top;
-              }
-              &.active span.icon{
-                background-position: -132px -64px;                
-              }
-            }
-
-            /* Product Listing */
-
-            &.layout-product_listing-default{ 
-              span.icon{
-                background-position: -264px top;
-              }
-              &.active span.icon{
-                background-position: -264px -64px;
-              }
-            }
-            &.layout-product_listing-3-in-a-row {
-              span.icon {
-                background-position: -330px top;
-              }
-              &.active span.icon{
-                background-position: -330px -64px;
-              }
-            }
-            &.layout-product_listing-double-width  {
-              span.icon {
-                background-position: -396px top;
-              }
-              &.active span.icon{
-                background-position: -396px -64px;
-              }
-            }
-            &.layout-product_listing-super-wide  {
-              span.icon {
-                background-position: -462px top;
-              }
-              &.active span.icon{
-                background-position: -462px -64px;                
-              }
-            }
-
-            /* Product Details*/
-
-            &.layout-product_details-default{ 
-              span.icon{
-                background-position: -528px top;
-              }
-              &.active span.icon{
-                background-position: -528px -64px;
-              }
-            }
-            &.layout-product_details-right {
-              span.icon {
-                background-position: -594px top;
-              }
-              &.active span.icon{
-                background-position: -594px -64px;
-              }
-            }
-            &.layout-product_details-top-header-left {
-              span.icon {
-                background-position: -660px top;
-              }
-              &.active span.icon{
-                background-position: -660px -64px;
-              }
-            }
-            &.layout-product_details-top-header-right {
-              span.icon {
-                background-position: -726px top;
-              }
-              &.active span.icon{
-                background-position: -726px -64px;                
-              }
-            }
-
-            /* Cart Layouts */
-            &.layout-cart-default { 
-              span.icon{
-                background-position: -792px top;
-              }
-              &.active span.icon{
-                background-position: -792px -64px;
-              }
-            }            
-            &.layout-cart-double-width { 
-              span.icon{
-                background-position: -924px top;
-              }
-              &.active span.icon{
-                background-position: -924px -64px;
-              }
-            }
-            &.layout-cart-3-in-a-row { 
-              span.icon{
-                background-position: -858px top;
-              }
-              &.active span.icon{
-                background-position: -858px -64px;
+                color: #39412b;
               }
             }
           }
